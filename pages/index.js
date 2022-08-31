@@ -29,32 +29,40 @@ export default function Home() {
         </section>
         {/* Example section */}
         <section>
-        <div class="mockup-window border bg-base-300">
-          <div class="flex justify-center px-4 py-16 bg-base-200">
-            <div class="card w-96 bg-base-100 shadow-xl">
-              <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-              <div class="card-body">
-                <h2 class="card-title">
-                  Shoes!
-                  <div class="badge badge-secondary">NEW</div>
-                </h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div class="card-actions justify-end">
-                  <div class="badge badge-outline">Fashion</div> 
-                  <div class="badge badge-outline">Products</div>
+        <div class="grid grid-cols-2 gap-5">
+          <ul class="steps steps-vertical">
+            <li class="step step-primary">Idea tu proyecto</li>
+            <li class="step step-primary">Registrate en nuestra plataforma</li>
+            <li class="step">Agrega tu billetera y objetivos de recaudacion</li>
+            <li class="step">Publica tu proyecto y empeza a recibir fondos!</li>
+          </ul>
+          <div class="mockup-window border bg-base-300">
+            <div class="flex justify-right px-4 py-16 bg-base-200">
+              <div class="card w-96 bg-base-100 shadow-xl">
+                <figure><img src="https://ethereum.org/static/28214bb68eb5445dcb063a72535bc90c/9019e/hero.webp" alt="Shoes" /></figure>
+                <div class="card-body">
+                  <h2 class="card-title">
+                    Tu proyecto!
+                    <div class="badge badge-secondary">NUEVO</div>
+                  </h2>
+                  <p>Todos los detalles de tu proyecto revolucionario.</p>
+                  <div class="flex justify-between">
+                    <span class="text-lg font-medium text-success dark:text-white">559 USDT</span>
+                    <span class="text-lg font-medium text-success dark:text-white">43%</span>
+                  </div>
+
+                  <progress class="progress progress-success w-full" value="43" max="100"></progress>
+                  <div class="card-actions justify-end">
+                    <div class="badge badge-outline">Tech</div> 
+                    <div class="badge badge-outline">Innovacion</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        </section>
 
-        <ul class="steps steps-vertical">
-          <li class="step step-primary">Register asdasdasdasdfsferdgdfgdfgdsfgsdfgdfgdsgfdsgdsgdsfgdsfgdsfgdsfgsdfgdsgdsfgdsfgdsfgdfgdsgfdsgf</li>
-          <li class="step step-primary">Choose plan</li>
-          <li class="step">Purchase</li>
-          <li class="step">Receive Product</li>
-        </ul>
+        </section>
 
       </main>
     </div>
