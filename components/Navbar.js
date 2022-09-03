@@ -1,7 +1,31 @@
 import { loadGetInitialProps } from "next/dist/shared/lib/utils";
+import { useState } from "react";
+import ConnectWalletModal from "./ConnectWalletModal";
 import ProfileButton from "./ProfileButton";
+const { ethers } = require("ethers");
+import { loadWallet } from "/utils/wallet_connection"
 
 export default function Navbar(){
+
+
+    const handleClick = async () => {
+
+      // Connect with Metamask
+      if(!walletConnected){
+        const address = await loadWallet();
+        const srubbed_address = address.substr(0,3) + "..." + address.substr(-4,4);
+        setWalletConnected(true);
+        setWalletAddress(srubbed_address)
+      }else{
+
+      }
+      
+
+    }
+
+    const [walletAddress, setWalletAddress] = useState("connectar wallet");
+    const [walletConnected, setWalletConnected] = useState(false);
+
     return (
       <div class="navbar bg-100 gap-4 p-6">
         <div class="flex-1">
@@ -11,7 +35,9 @@ export default function Navbar(){
           <a class="btn btn-primary rounded-full normal-case text-l text-white">explorar</a>
         </div>
         <div class="flex-none">
-          <a class="btn btn-primary rounded-full normal-case text-l text-white">conectar wallet</a>
+          <label for="connect-wallet"  class="btn btn-primary rounded-full normal-case text-l text-white">{walletAddress}</label>
+          <ConnectWalletModal/>
+          {/* <a onClick={handleClick} class="btn btn-primary rounded-full normal-case text-l text-white">{walletAddress}</a> */}
         </div>
         <div class="flex-none gap-2">
           <div class="dropdown dropdown-end">

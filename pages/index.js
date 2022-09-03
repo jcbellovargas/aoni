@@ -53,9 +53,10 @@ export default function Home() {
 
                   <progress class="progress progress-success w-full" value="43" max="100"></progress>
                   <div class="card-actions justify-end">
-                    <div class="badge badge-outline">Tech</div> 
+                    <div class="badge badge-outline">Tech</div>
                     <div class="badge badge-outline">Innovacion</div>
                   </div>
+                  <button class="btn btn-secondary rounded-full normal-case mt-10 text-lg text-white">Participar</button>
                 </div>
               </div>
             </div>

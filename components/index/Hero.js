@@ -25,7 +25,7 @@ export default function Hero(params) {
                 Blockchain
               </span>
           </p>     
-          <a class="btn btn-primary rounded-full normal-case mt-10 text-xl text-white">Crea tu Proyecto</a>
+          <button class="btn btn-primary rounded-full normal-case mt-10 text-xl text-white">Crea tu Proyecto</button>
       </div>
     </div>
   )
