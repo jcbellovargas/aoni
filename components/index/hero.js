@@ -1,4 +1,4 @@
-import ParticlesContainer from './ParticlesContainer'
+import ParticlesContainer from './particles-container'
 
 export default function Hero(params) {
   return(

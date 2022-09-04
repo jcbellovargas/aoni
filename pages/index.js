@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import Card from "../components/index/Card"
-import Hero from "../components/index/Hero"
-import ParticlesContainer from '../components/index/ParticlesContainer'
+import Card from "../components/index/card"
+import Hero from "../components/index/hero"
+import ParticlesContainer from '../components/index/particles-container'
 
 export default function Home() {
 
