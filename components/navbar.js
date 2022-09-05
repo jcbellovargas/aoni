@@ -25,7 +25,7 @@ export default function Navbar(){
       </div>
       <div className="flex-none">
         <label htmlFor="connect-wallet" className="btn btn-primary rounded-full normal-case text-l text-white">{walletAddress}</label>
-        <WalletModal isWalletConnected={isWalletConnected} setWalletAddress={setWalletAddress}/>
+        <WalletModal isWalletConnected={isWalletConnected} setWalletAddress={setWalletAddress} selectedAddress={walletAddress}/>
       </div>
       <div className="flex-none gap-2">
         <div className="dropdown dropdown-end">
