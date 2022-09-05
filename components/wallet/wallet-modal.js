@@ -3,13 +3,10 @@ import { authWallet, scrubAddress } from "/utils/wallet-utils";
 import { getScrubbedSelectedAddress, getSelectedAddress } from "../../utils/wallet-utils";
 
 export default function WalletModal(props) {
-  const [isLoading, setIsLoading] = useState(false)
 
   const handleWalletLoginClick = async () => {
-    setIsLoading(true);
     const address = await authWallet();
     props.setWalletAddress(scrubAddress(address));
-    setIsLoading(false)
   }
 
   return (
