@@ -11,11 +11,6 @@ export default function Card(props) {
         <div class="text-gray-500">
           <p>{props.body}</p>
         </div>
-        
-        
-        {/* <div class="card-actions justify-end">
-          <button class="btn btn-primary">Buy Now</button>
-        </div> */}
       </div>
     </div>
   )

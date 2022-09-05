@@ -1,7 +1,5 @@
 import { useState } from "react";
-import WalletModal from "./wallet-modal";
-const { ethers } = require("ethers");
-import { connectWallet } from "/utils/wallet-connection"
+import WalletModal from "./wallet/wallet-modal";
 
 export default function Navbar(){
 
