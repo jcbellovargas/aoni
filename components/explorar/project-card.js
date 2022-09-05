@@ -5,7 +5,7 @@ export default function ProjectCard(props) {
     <>
       <Link href="/details/123123">
         <div class="card w-3/4 bg-base-100 shadow-xl transition duration-100 hover:scale-105 hover:bg-white-600 cursor-pointer">
-          <figure><img src="https://ethereum.org/static/28214bb68eb5445dcb063a72535bc90c/9019e/hero.webp" alt="Shoes" /></figure>
+          <figure><img src="https://placeimg.com/640/320/tech" alt="Shoes" /></figure>
           <div class="card-body">
             <h2 class="card-title">
               Tu proyecto!
