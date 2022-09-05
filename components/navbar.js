@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getScrubbedSelectedAddress } from "../utils/wallet-utils";
 import WalletModal from "./wallet/wallet-modal";
+import Link from 'next/link'
 
 export default function Navbar(){
 
@@ -18,10 +19,15 @@ export default function Navbar(){
   return (
     <div className="navbar bg-100 gap-4 p-6">
       <div className="flex-1">
-        <a className="btn btn-ghost rounded-full normal-case text-3xl text-primary" href="/">aoni</a>
+        <Link href="/">
+          <a className="btn btn-ghost rounded-full normal-case text-3xl text-primary">aoni</a>
+        </Link>
+
       </div>
       <div className="flex-none">
-        <a className="btn btn-primary rounded-full normal-case text-l text-white" href="/explorar">explorar</a>
+        <Link href="/explorar">
+          <a className="btn btn-primary rounded-full normal-case text-l text-white">explorar</a>
+        </Link>
       </div>
       <div className="flex-none">
         <label htmlFor="connect-wallet" className="btn btn-primary rounded-full normal-case text-l text-white">{walletAddress}</label>

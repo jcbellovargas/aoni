@@ -1,7 +1,7 @@
 export default function ProjectCard(props) {
   return(
     <>
-          <div class="card w-3/4 bg-base-100 shadow-xl">
+          <div class="card w-3/4 bg-base-100 shadow-xl transition duration-100 hover:scale-105 hover:bg-white-600 cursor-pointer">
             <figure><img src="https://ethereum.org/static/28214bb68eb5445dcb063a72535bc90c/9019e/hero.webp" alt="Shoes" /></figure>
             <div class="card-body">
               <h2 class="card-title">
@@ -18,7 +18,6 @@ export default function ProjectCard(props) {
                 <div class="badge badge-outline">Tech</div>
                 <div class="badge badge-outline">Innovacion</div>
               </div>
-              {/* <button class="btn btn-secondary rounded-full normal-case mt-10 text-lg text-white">Participar</button> */}
             </div>
           </div>
     </>
