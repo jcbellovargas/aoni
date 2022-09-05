@@ -1,8 +1,8 @@
 export default function CategoriesTab(props){
   return(
     <>
-      <div className="tabs tabs-boxed justify-center bg-base-100 pt-10 pb-20">
-        <a className="tab  tab-lg">Salud</a>
+      <div className="tabs tabs-boxed justify-center bg-base-100 py-10">
+        <a className="tab tab-lg">Salud</a>
         <a className="tab tab-lg">Tecnologia</a>
         <a className="tab tab-lg">Moda</a> 
         <a className="tab tab-lg tab-active">Negocios</a> 
