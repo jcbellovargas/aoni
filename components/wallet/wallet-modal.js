@@ -32,7 +32,7 @@ export default function WalletModal(props) {
                     <div class="stat-desc text-xl">
                       <a href={"https://goerli.etherscan.io/address/"+getSelectedAddress()} class="justify-items-center" target="blank">
                         <div class="flex mt-3">
-                          <img src="external-link.svg" class="mt-2 ml-0 w-5 h-4" alt="Etherscan"/>
+                          <img src="/external-link.svg" class="mt-2 ml-0 w-5 h-4" alt="Etherscan"/>
                           <span class="float-left">Ver en Etherescan</span>
                         </div>
                       </a>

@@ -11,15 +11,15 @@ export default function ProjectCard(props) {
               Tu proyecto!
               <div class="badge badge-secondary">NUEVO</div>
             </h2>
-            <p>Todos los detalles de tu proyecto revolucionario.</p>
+            <p>Pequeña descripcion de tu proyecto revolucionario.</p>
             <div class="flex justify-between">
               <span class="text-lg font-medium text-success dark:text-white">559 USDT</span>
               <span class="text-lg font-medium text-success dark:text-white">43%</span>
             </div>
             <progress class="progress progress-success w-full" value="43" max="100"></progress>
             <div class="card-actions justify-end">
-              <div class="badge badge-outline">Tech</div>
-              <div class="badge badge-outline">Innovacion</div>
+              <div class="badge badge-outline">Tecnologia</div>
+              <div class="badge badge-outline">Redes Sociales</div>
             </div>
           </div>
         </div>
