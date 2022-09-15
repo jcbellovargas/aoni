@@ -1,12 +1,21 @@
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { getBalance } from "/utils/wallet-utils";
 import CheckoutModal from '../../components/checkout-modal'
 
 
-export default function Details(){
-  const router = useRouter()
-  const { pid } = router.query
+export default function Details() {
+  const router = useRouter();
+  const { pid } = router.query;
 
-  return(
+  const [currentBalance, setCurrentBalance] = useState(0);
+
+  const handleModalOpenClick = async () => {
+    const balance = await getBalance();
+    setCurrentBalance(balance)
+  }
+
+  return (
     <>
       {/* Project id {pid} */}
       <div className="hero min-h-screen rounded-full bg-primary bg-opacity-5">
@@ -23,8 +32,8 @@ export default function Details(){
               </div>
               <progress className="progress progress-success w-2/3  float-left" value="70" max="100"></progress>
               <span class="text-lg font-small text-black dark:text-white">Quedan 24 dias</span>
-              <label htmlFor="checkout-modal" className="btn btn-secondary rounded-full w-2/3 mt-6">Participar</label>
-              <CheckoutModal/>
+              <label onClick={handleModalOpenClick} htmlFor="checkout-modal" className="btn btn-secondary rounded-full w-2/3 mt-6">Participar</label>
+              <CheckoutModal currentBalance={currentBalance} />
             </div>
           </div>
         </div>
