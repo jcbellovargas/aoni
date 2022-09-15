@@ -19,7 +19,7 @@ export default function WalletModal(props) {
                 <h3 className="text-lg font-bold">Conectar a una wallet</h3>
                 <button onClick={handleWalletLoginClick} className="btn btn-secondary border-transparent w-max gap-80 my-8 mr bg-opacity-70 text-white">
                   <span>MetaMask</span>
-                  <img className="mr-0 object-scale-down h-10 w-8" src="metamask_icon.png" alt="Icon" />
+                  <img className="mr-0 object-scale-down h-10 w-8" src="/metamask_icon.png" alt="Icon" />
                 </button>
               </div>
             )}
