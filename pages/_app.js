@@ -1,12 +1,18 @@
 import '../styles/globals.css'
 import Layout from '../components/layout'
-import React, { useEffect, useState } from "react";
+import AccountContext from '/contexts/accountContext'
+import { useState } from 'react'
 
 export default function MyApp({ Component, pageProps }) {
+
+  const [address, setAddress] = useState(null);
+
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <AccountContext.Provider value={{address, setAddress}}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </AccountContext.Provider>
       
   )
 }

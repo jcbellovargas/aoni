@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { getScrubbedSelectedAddress } from "../utils/wallet-utils";
-import WalletModal from "./wallet/wallet-modal";
+import WalletModal from "./wallet-modal";
 import Link from 'next/link'
+import AccountContext from "../contexts/accountContext";
 
 export default function Navbar(){
 
-  const [walletAddress, setWalletAddress] = useState("connectar wallet");
   const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const { address, setAddress } = useContext(AccountContext);
 
   useEffect(() => {
     const selectedAddress = getScrubbedSelectedAddress();
     if(!!selectedAddress){
-      setWalletAddress(selectedAddress);
+      setAddress(selectedAddress);
       setIsWalletConnected(true);
     }
   })
@@ -30,8 +31,8 @@ export default function Navbar(){
         </Link>
       </div>
       <div className="flex-none">
-        <label htmlFor="connect-wallet" className="btn btn-primary rounded-full normal-case text-l text-white">{walletAddress}</label>
-        <WalletModal isWalletConnected={isWalletConnected} setWalletAddress={setWalletAddress} selectedAddress={walletAddress}/>
+        <label htmlFor="connect-wallet" className="btn btn-primary rounded-full normal-case text-l text-white">{!!address ? address : "conectar wallet"}</label>
+        <WalletModal isWalletConnected={isWalletConnected} selectedAddress={address}/>
       </div>
       <div className="flex-none gap-2">
         <div className="dropdown dropdown-end">
