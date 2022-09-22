@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { sendEth, sendTransaction } from "../utils/wallet-utils";
-import { getBalance } from "/utils/wallet-utils";
 
 export default function CheckoutModal(props) {
   const [enoughBalance, setEnoughBalance] = useState(true);

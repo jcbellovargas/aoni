@@ -17,9 +17,7 @@ export default function Details() {
 
   const handleCheckoutButtonClick = async () => {
     if(!!address){
-      debugger;
       const balance = await getBalance();
-      debugger;
       setCurrentBalance(balance);
       checkoutModalRef.current.click();
     }else{

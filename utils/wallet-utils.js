@@ -5,7 +5,7 @@ const TETHER_CONTACT_ADDRESS = '0xD19230e27095C33C4F722E7E420AFF190e5F2553'; // 
 
 export const getUSDTContract = async () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-  const contract = new ethers.Contract(TETHER_CONTACT_ADDRESS, TETHER_CONTRACT_ABI.abi, provider);
+  const contract = new ethers.Contract(TETHER_CONTACT_ADDRESS, TETHER_CONTRACT_ABI.abi, provider.getSigner());
   return contract
 }
 
@@ -15,7 +15,7 @@ export const authWallet = async () => {
   return address
 }
 
-export const getEthSigner = async() => {
+export const getEthSigner = async () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
   // Prompt user for account connections
   let accounts = await provider.send("eth_requestAccounts", []);
@@ -47,12 +47,10 @@ export const getBalance = async () => {
   return ethers.utils.formatUnits(ownerBalance, balanceDecimals)
 }
 
-export const sendEth = async (amount, to) => {
-  const signer = await getEthSigner();
-  debugger;
-  const tx = signer.sendTransaction({
-    to: to,
-    value: ethers.utils.parseEther(amount)
-  });
-  console.log(tx)
+export const sendTransaction = async (amount, to) => {
+  const contract = await getUSDTContract();
+  const decimals = await contract.decimals();
+  const sendAmount = ethers.utils.parseUnits(amount, decimals)
+  contract.transfer(to, sendAmount);
+
 }
