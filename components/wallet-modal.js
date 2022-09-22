@@ -1,12 +1,15 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { authWallet, scrubAddress } from "/utils/wallet-utils";
-import { getScrubbedSelectedAddress, getSelectedAddress } from "../../utils/wallet-utils";
+import { getScrubbedSelectedAddress, getSelectedAddress } from "../utils/wallet-utils";
+import AccountContext from "../contexts/accountContext";
 
 export default function WalletModal(props) {
 
+  const { address, setAddress } = useContext(AccountContext);
+
   const handleWalletLoginClick = async () => {
-    const address = await authWallet();
-    props.setWalletAddress(scrubAddress(address));
+    const selectedAddress = await authWallet();
+    setAddress(scrubAddress(selectedAddress));
   }
 
   return (

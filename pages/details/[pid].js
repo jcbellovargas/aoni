@@ -1,18 +1,28 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { getBalance } from "/utils/wallet-utils";
 import CheckoutModal from '../../components/checkout-modal'
-
+import AccountContext from '../../contexts/accountContext';
+import WalletModal from '../../components/wallet-modal';
 
 export default function Details() {
   const router = useRouter();
   const { pid } = router.query;
 
   const [currentBalance, setCurrentBalance] = useState(0);
+  const {address, setAddress} = useContext(AccountContext);
 
-  const handleModalOpenClick = async () => {
-    const balance = await getBalance();
-    setCurrentBalance(balance)
+  const walletModalRef = useRef(null);
+  const checkoutModalRef = useRef(null);
+
+  const handleCheckoutButtonClick = async () => {
+    if(!!address){
+      const balance = await getBalance();
+      setCurrentBalance(balance);
+      checkoutModalRef.current.click();
+    }else{
+      walletModalRef.current.click();
+    }
   }
 
   return (
@@ -32,8 +42,11 @@ export default function Details() {
               </div>
               <progress className="progress progress-success w-2/3  float-left" value="70" max="100"></progress>
               <span class="text-lg font-small text-black dark:text-white">Quedan 24 dias</span>
-              <label onClick={handleModalOpenClick} htmlFor="checkout-modal" className="btn btn-secondary rounded-full w-2/3 mt-6">Participar</label>
+              <button onClick={handleCheckoutButtonClick} className="btn btn-secondary rounded-full w-2/3 mt-6">Participar</button>
+              <label ref={checkoutModalRef} htmlFor="checkout-modal" className="h-0 w-0 invisible"/>
               <CheckoutModal currentBalance={currentBalance} />
+              <label ref={walletModalRef} htmlFor="connect-wallet" className="h-0 w-0 invisible btn btn-primary rounded-full normal-case text-l text-white"/>
+              <WalletModal isWalletConnected={false} selectedAddress={address}/>
             </div>
           </div>
         </div>
