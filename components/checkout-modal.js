@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { sendEth } from "../utils/wallet-utils";
+import { sendEth, sendTransaction } from "../utils/wallet-utils";
 import { getBalance } from "/utils/wallet-utils";
 
 export default function CheckoutModal(props) {
@@ -13,7 +13,7 @@ export default function CheckoutModal(props) {
   }
 
   const handleTransferOnClick = async () => {
-    await sendEth(transferAmount, "0x574962854630D8dFAAFBe80Cdc8AF13E019a7CC3")
+    await sendTransaction(transferAmount, "0x574962854630D8dFAAFBe80Cdc8AF13E019a7CC3")
   }
 
   return (

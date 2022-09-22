@@ -1,4 +1,13 @@
 const { ethers } = require("ethers");
+const TETHER_CONTRACT_ABI = require("/artifacts/contracts/Tether.sol/Tether.json");
+const TETHER_CONTACT_ADDRESS = '0xD19230e27095C33C4F722E7E420AFF190e5F2553'; // Goerli testnet contract
+
+
+export const getUSDTContract = async () => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+  const contract = new ethers.Contract(TETHER_CONTACT_ADDRESS, TETHER_CONTRACT_ABI.abi, provider);
+  return contract
+}
 
 export const authWallet = async () => {
   const signer = await getEthSigner();
@@ -32,11 +41,10 @@ export const getScrubbedSelectedAddress = () => {
 }
 
 export const getBalance = async () => {
-  const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-  const balance = await provider.getBalance(getSelectedAddress());
-  const balanceInEth = ethers.utils.formatEther(balance);
-  return balanceInEth
-
+  const usdtContact = await getUSDTContract();
+  const ownerBalance = await usdtContact.balanceOf(getSelectedAddress());
+  const balanceDecimals = await usdtContact.decimals()
+  return ethers.utils.formatUnits(ownerBalance, balanceDecimals)
 }
 
 export const sendEth = async (amount, to) => {
