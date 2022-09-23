@@ -54,7 +54,7 @@ export default function CheckoutModal(props) {
       <input type="checkbox" id="checkout-modal" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative">
-          <label htmlFor="checkout-modal" onClick={handleCloseClick} className="btn btn-sm btn-circle absolute right-2 top-2 border-primary bg-primary">✕</label>
+          <label htmlFor="checkout-modal" onClick={handleCloseClick} className="btn btn-sm btn-circle btn-outline hover:bg-transparent hover:text-black absolute right-2 top-2 border-none bg-transparent">✕</label>
           <div className={showTransactionConfirmation ? "hidden" : "block"}>
             <h3 className="text-lg font-bold mb-5">{transactionInProgress ? "Transaccion en proceso" : "Realizar Transferencia"}</h3>
             {transactionInProgress && (
@@ -75,7 +75,7 @@ export default function CheckoutModal(props) {
                 </div>
                 <span className="absolute right-20 text-lg">Balance: {accountBalance}</span>
               </div>
-              <button className="btn btn-primary rounded-full border-none text-xl w-full mt-5 h-20" 
+              <button className="btn btn-secondary rounded-full border-none text-xl w-full mt-5 h-20" 
                       disabled={!enoughBalance}
                       onClick={handleTransferOnClick}>
                 { enoughBalance ? "TRANSFERIR" : "BALANCE INSUFICIENTE" }
