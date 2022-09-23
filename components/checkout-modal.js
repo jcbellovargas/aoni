@@ -21,12 +21,13 @@ export default function CheckoutModal(props) {
     }
     setTransactionInProgress(false)
   }
+
   useEffect(() => { 
-    const fetchSymbol = async () => {
+    const fetchTokenSymbol = async () => {
       const symbol = await getTokenSymbol();
       setTokenSymbol(symbol);
     }
-    fetchSymbol();
+    fetchTokenSymbol();
   }, []);
   
 
@@ -34,7 +35,7 @@ export default function CheckoutModal(props) {
     <>
       <input type="checkbox" id="checkout-modal" className="modal-toggle" />
       <label htmlFor="checkout-modal" className="modal cursor-pointer">
-        <label className="modal-box relative" for="">
+        <label className="modal-box relative" htmlFor="">
           <h3 className="text-lg font-bold mb-5">{transactionInProgress ? "Transaccion en progreso" : "Realizar Transferencia"}</h3>
           {transactionInProgress && (
             <div className="pl-10 flex flex-col items-center justify-center absolute w-5/6 h-2/3">
