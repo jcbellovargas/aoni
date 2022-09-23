@@ -1,16 +1,18 @@
+import CategoriesItem from "./categories-item";
 export default function CategoriesTab(props){
+
   return(
     <>
       <div className="tabs tabs-boxed justify-center bg-base-100 py-10">
-        <a className="tab tab-lg">Salud</a>
-        <a className="tab tab-lg">Tecnologia</a>
-        <a className="tab tab-lg">Moda</a> 
-        <a className="tab tab-lg tab-active">Negocios</a> 
-        <a className="tab tab-lg">Juegos</a>
-        <a className="tab tab-lg">Arte</a>
-        <a className="tab tab-lg">Emergencia</a>
-        <a className="tab tab-lg">Comida</a>
-        <a className="tab tab-lg">Redes Sociales</a>
+        <CategoriesItem setSelectedTag={props.setSelectedTag} selectedTag={props.selectedTag} tag="Salud"></CategoriesItem>
+        <CategoriesItem setSelectedTag={props.setSelectedTag} selectedTag={props.selectedTag} tag="Tecnologia"></CategoriesItem>
+        <CategoriesItem setSelectedTag={props.setSelectedTag} selectedTag={props.selectedTag} tag="Moda"></CategoriesItem>
+        <CategoriesItem setSelectedTag={props.setSelectedTag} selectedTag={props.selectedTag} tag="Negocios"></CategoriesItem>
+        <CategoriesItem setSelectedTag={props.setSelectedTag} selectedTag={props.selectedTag} tag="Juegos"></CategoriesItem>
+        <CategoriesItem setSelectedTag={props.setSelectedTag} selectedTag={props.selectedTag} tag="Arte"></CategoriesItem>
+        <CategoriesItem setSelectedTag={props.setSelectedTag} selectedTag={props.selectedTag} tag="Emergencia"></CategoriesItem>
+        <CategoriesItem setSelectedTag={props.setSelectedTag} selectedTag={props.selectedTag} tag="Comida"></CategoriesItem>
+        <CategoriesItem setSelectedTag={props.setSelectedTag} selectedTag={props.selectedTag} tag="Redes Sociales"></CategoriesItem>
       </div>
     </>
   )
