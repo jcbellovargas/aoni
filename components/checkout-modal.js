@@ -12,6 +12,10 @@ export default function CheckoutModal(props) {
   const [accountBalance, setAccountBalance] = useState(0);
   const { address } = useContext(AccountContext);
 
+  const handleCloseClick = () => {
+    setShowTransactionConfirmation(false);
+  }
+
   const handleInputOnChange = (e) => {
     const value = parseFloat(e.target.value || 0);
     setTransferAmount(value.toString())
@@ -24,8 +28,6 @@ export default function CheckoutModal(props) {
     if (!!transaction.hash){
       setShowTransactionConfirmation(true);
       setTransactionHash(transaction.hash);
-      await transaction.wait();
-      setShowTransactionConfirmation(false);
     }
     setTransactionInProgress(false)
   }
@@ -50,8 +52,9 @@ export default function CheckoutModal(props) {
   return (
     <>
       <input type="checkbox" id="checkout-modal" className="modal-toggle" />
-      <label htmlFor="checkout-modal" className="modal cursor-pointer">
-        <label className="modal-box relative" htmlFor="">
+      <div className="modal">
+        <div className="modal-box relative">
+          <label htmlFor="checkout-modal" onClick={handleCloseClick} className="btn btn-sm btn-circle absolute right-2 top-2 border-primary bg-primary">✕</label>
           <div className={showTransactionConfirmation ? "hidden" : "block"}>
             <h3 className="text-lg font-bold mb-5">{transactionInProgress ? "Transaccion en proceso" : "Realizar Transferencia"}</h3>
             {transactionInProgress && (
@@ -72,7 +75,7 @@ export default function CheckoutModal(props) {
                 </div>
                 <span className="absolute right-20 text-lg">Balance: {accountBalance}</span>
               </div>
-              <button className="btn btn-secondary rounded-full border-none text-xl w-full mt-5 h-20" 
+              <button className="btn btn-primary rounded-full border-none text-xl w-full mt-5 h-20" 
                       disabled={!enoughBalance}
                       onClick={handleTransferOnClick}>
                 { enoughBalance ? "TRANSFERIR" : "BALANCE INSUFICIENTE" }
@@ -98,8 +101,8 @@ export default function CheckoutModal(props) {
               </div>
             </div>
           </div>
-        </label>
-      </label>
+        </div>
+      </div>
     </>
   )
 }
