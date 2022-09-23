@@ -44,8 +44,8 @@ export default function Details() {
               <span className="text-lg font-small text-black dark:text-white">Quedan 24 dias</span>
               <button onClick={handleCheckoutButtonClick} className="btn btn-secondary rounded-full w-2/3 mt-6">Participar</button>
               <label ref={checkoutModalRef} htmlFor="checkout-modal" className="h-0 w-0 invisible"/>
-              <CheckoutModal currentBalance={currentBalance} />
-              <label ref={walletModalRef} htmlFor="connect-wallet" className="h-0 w-0 invisible btn btn-primary rounded-full normal-case text-l text-white"/>
+              <CheckoutModal currentBalance={currentBalance}/>
+              <label ref={walletModalRef} htmlFor="connect-wallet" className="h-0 w-0 invisible"/>
               <WalletModal isWalletConnected={false} selectedAddress={address}/>
             </div>
           </div>

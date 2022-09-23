@@ -50,13 +50,12 @@ export const getBalance = async () => {
 export const sendTransaction = async (amount, to) => {
   const contract = await getUSDTContract();
   const symbol = await contract.symbol();
-  debugger;
   const decimals = await contract.decimals();
   const sendAmount = ethers.utils.parseUnits(amount, decimals)
   let tx;
-  try{
+  try {
     tx = await contract.transfer(to, sendAmount);
-  }catch(error){
+  } catch(error){
     tx = error.transaction
   }
   return tx;
