@@ -9,7 +9,6 @@ export default function CheckoutModal(props) {
   const [showTransactionConfirmation, setShowTransactionConfirmation] = useState(false);
   const [tokenSymbol, setTokenSymbol] = useState('USDT');
   const [transactionHash, setTransactionHash] = useState("");
-  const [accountBalance, setAccountBalance] = useState(0);
   const { address } = useContext(AccountContext);
 
   const handleCloseClick = () => {
@@ -19,7 +18,7 @@ export default function CheckoutModal(props) {
   const handleInputOnChange = (e) => {
     const value = parseFloat(e.target.value || 0);
     setTransferAmount(value.toString())
-    setEnoughBalance(parseFloat(props.currentBalance) > value)
+    setEnoughBalance(parseFloat(props.currentAccountBalance) > value)
   }
 
   const handleTransferOnClick = async () => {
@@ -39,15 +38,6 @@ export default function CheckoutModal(props) {
     }
     fetchTokenSymbol();
   }, []);
-
-  useEffect(() => { 
-    const fetchAccountBalance = async () => {
-      const balance = await getBalance();
-      setAccountBalance(balance);
-    }
-    fetchAccountBalance();
-  });
-  
 
   return (
     <>
@@ -73,7 +63,7 @@ export default function CheckoutModal(props) {
                     <span className="float-right text-lg font-bold pt-2 px-3">{tokenSymbol}</span>
                   </div>
                 </div>
-                <span className="absolute right-20 text-lg">Balance: {accountBalance}</span>
+                <span className="absolute right-20 text-lg">Balance: {props.currentAccountBalance}</span>
               </div>
               <button className="btn btn-secondary rounded-full border-none text-xl w-full mt-5 h-20" 
                       disabled={!enoughBalance}
