@@ -50,20 +50,20 @@ export default function Navbar(){
               </Link>
             )}
             {session && (
-            <>
               <div className="avatar online placeholder">
                 <div className="bg-primary-focus text-neutral-content rounded-full w-11">
                   <span className="text-l">{session["user"]["name"][0]}</span>
                 </div>
               </div> 
-              <ul tabIndex="0" className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                <li><a>Ajustes</a></li>
-                <li><a>Ver Perfil</a></li>
-                <li><a onClick={() => signOut()}>Cerrar Sesion</a></li>
-              </ul>
-            </>
-            )}
+             )}
           </label>
+          {session && (
+            <ul tabIndex="0" className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+              <li><a>Ajustes</a></li>
+              <li><a>Ver Perfil</a></li>
+              <li><a onClick={() => signOut()}>Cerrar Sesion</a></li>
+            </ul>
+          )}
         </div>
       </div>
     </div>
