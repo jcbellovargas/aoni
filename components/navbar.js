@@ -3,11 +3,14 @@ import { getScrubbedSelectedAddress } from "../utils/wallet-utils";
 import WalletModal from "./wallet-modal";
 import Link from 'next/link'
 import AccountContext from "../contexts/accountContext";
+import { useSession, signIn, signOut } from "next-auth/react"
+
 
 export default function Navbar(){
 
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const { address, setAddress } = useContext(AccountContext);
+  const { data: session } = useSession()
 
   useEffect(() => {
     const selectedAddress = getScrubbedSelectedAddress();
@@ -37,15 +40,30 @@ export default function Navbar(){
       <div className="flex-none gap-2">
         <div className="dropdown dropdown-end">
           <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="https://placeimg.com/80/80/people" />
-            </div>
+            {!session && (
+              <Link href="/login">
+                <div className="avatar offline placeholder">
+                  <div className="bg-primary-focus text-neutral-content rounded-full w-11">
+                    <span className="text-xs">login</span>
+                  </div>
+                </div> 
+              </Link>
+            )}
+            {session && (
+            <>
+              <div className="avatar online placeholder">
+                <div className="bg-primary-focus text-neutral-content rounded-full w-11">
+                  <span className="text-l">{session["user"]["name"][0]}</span>
+                </div>
+              </div> 
+              <ul tabIndex="0" className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                <li><a>Ajustes</a></li>
+                <li><a>Ver Perfil</a></li>
+                <li><a onClick={() => signOut()}>Cerrar Sesion</a></li>
+              </ul>
+            </>
+            )}
           </label>
-          <ul tabIndex="0" className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-            <li><a>Ajustes</a></li>
-            <li><a>Ver Perfil</a></li>
-            <li><a>Cerrar Sesion</a></li>
-          </ul>
         </div>
       </div>
     </div>

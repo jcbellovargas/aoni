@@ -38,7 +38,7 @@ export default function Home() {
           <div className="mockup-window border bg-base-300">
             <div className="flex justify-right px-4 py-16 bg-base-200">
               <div className="card w-96 bg-base-100 shadow-xl">
-                <figure><img src="https://ethereum.org/static/28214bb68eb5445dcb063a72535bc90c/9019e/hero.webp" alt="Shoes" /></figure>
+                <figure><img src="/newhero.webp" alt="eth" /></figure>
                 <div className="card-body">
                   <h2 className="card-title">
                     Tu proyecto!
