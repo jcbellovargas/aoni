@@ -38,7 +38,7 @@ export default function Home() {
           <div className="card-body">
             {providers.map(provider => { 
               return (
-                <div className="form-control mt-6">
+                <div key={provider.id} className="form-control mt-6">
                   <button onClick={() => signIn(provider.id, { callbackUrl: `${window.location.origin}` })} className="btn btn-secondary">
                     {providerLogo(provider.id)}
                     <span>{provider.name}</span>
