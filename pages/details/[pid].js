@@ -46,7 +46,7 @@ export default function Details() {
               {address && (
                 <>
                   <label ref={checkoutModalRef} htmlFor="checkout-modal" className="h-0 w-0 invisible"/>
-                    <CheckoutModal currentAccountBalance={currentAccountBalance}/>
+                  <CheckoutModal currentAccountBalance={currentAccountBalance}/>
                 </>
               )}
 

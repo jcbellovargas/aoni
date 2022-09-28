@@ -11,6 +11,8 @@ export default function CheckoutModal(props) {
   const [transactionHash, setTransactionHash] = useState("");
   const { address } = useContext(AccountContext);
 
+  const SEND_TO_ADDRESS = "0x574962854630D8dFAAFBe80Cdc8AF13E019a7CC3"
+
   const handleCloseClick = () => {
     setShowTransactionConfirmation(false);
   }
@@ -23,7 +25,7 @@ export default function CheckoutModal(props) {
 
   const handleTransferOnClick = async () => {
     setTransactionInProgress(true)
-    const transaction = await sendTransaction(transferAmount, "0x574962854630D8dFAAFBe80Cdc8AF13E019a7CC3")
+    const transaction = await sendTransaction(transferAmount, SEND_TO_ADDRESS)
     if (!!transaction.hash){
       setShowTransactionConfirmation(true);
       setTransactionHash(transaction.hash);
