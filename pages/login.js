@@ -1,8 +1,6 @@
 import { signIn, getProviders } from "next-auth/react";
-import { useState, useEffect } from "react";
 
-export default function Home() {
-  const [providers, setProviders] = useState([]);
+export default function Login({ providers }) {
 
   const providerLogo = (id) => {
     switch(id) {
@@ -19,14 +17,6 @@ export default function Home() {
     }
   }
 
-  useEffect(() => { 
-    const fetchProviders = async () => {
-      const providers = await getProviders();
-      setProviders(Object.values(providers))
-    }
-    fetchProviders();
-  }, []);
-
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col">
@@ -36,7 +26,7 @@ export default function Home() {
         </div>
         <div className="card flex-shrink-0 w-full max-w-2xl shadow-2xl bg-base-100">
           <div className="card-body">
-            {providers.map(provider => { 
+            {Object.values(providers).map(provider => {
               return (
                 <div key={provider.id} className="form-control mt-6">
                   <button onClick={() => signIn(provider.id, { callbackUrl: `${window.location.origin}` })} className="btn btn-secondary">
@@ -51,4 +41,12 @@ export default function Home() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      providers: await getProviders(context),
+    },
+  };
 }
