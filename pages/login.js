@@ -26,7 +26,7 @@ export default function Login({ providers }) {
         </div>
         <div className="card flex-shrink-0 w-full max-w-2xl shadow-2xl bg-base-100">
           <div className="card-body">
-            {Object.values(providers).map(provider => {
+            {providers.map(provider => {
               return (
                 <div key={provider.id} className="form-control mt-6">
                   <button onClick={() => signIn(provider.id, { callbackUrl: `${window.location.origin}` })} className="btn btn-secondary">
@@ -53,7 +53,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
-      providers: authProviders
+      providers: Object.values(authProviders)
     },
   };
 }
