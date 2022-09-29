@@ -47,7 +47,6 @@ export async function getServerSideProps(context) {
   let authProviders = []
   try {
     authProviders = await getProviders(context);
-    console.log(authProviders)
   } catch (err){
     console.log(err)
   }
