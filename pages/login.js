@@ -44,9 +44,16 @@ export default function Login({ providers }) {
 }
 
 export async function getServerSideProps(context) {
+  let authProviders = []
+  try {
+    authProviders = await getProviders(context);
+    console.log(authProviders)
+  } catch (err){
+    console.log(err)
+  }
   return {
     props: {
-      providers: await getProviders(context),
+      providers: authProviders
     },
   };
 }
