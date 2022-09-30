@@ -8,7 +8,7 @@ import { getFirestore } from 'firebase/firestore'
 import { db } from "../firebase"
 
 export default function Home() {
-  alert(JSON.stringify(db))
+  console.log(JSON.stringify(db))
 
   return (
     <div className={styles.container}>
