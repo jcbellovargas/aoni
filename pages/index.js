@@ -3,12 +3,7 @@ import styles from '../styles/Home.module.css'
 import Card from "../components/index/card"
 import Hero from "../components/index/hero"
 
-import { getApp } from "firebase/app";
-import { getFirestore } from 'firebase/firestore'
-import { db } from "../firebase"
-
 export default function Home() {
-  console.log(JSON.stringify(db))
 
   return (
     <div className={styles.container}>
