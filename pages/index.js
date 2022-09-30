@@ -1,10 +1,14 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Card from "../components/index/card"
 import Hero from "../components/index/hero"
 
+import { getApp } from "firebase/app";
+import { getFirestore } from 'firebase/firestore'
+import { db } from "../firebase"
+
 export default function Home() {
+  alert(JSON.stringify(db))
 
   return (
     <div className={styles.container}>
@@ -16,7 +20,7 @@ export default function Home() {
 
       <main className={styles.main} >
         {/* Hero section */}
-        <Hero/>
+        <Hero />
 
         {/* Cards section */}
         <section className="p-20 bg-gray-50">
@@ -28,42 +32,41 @@ export default function Home() {
         </section>
         {/* Example section */}
         <section>
-        <div className="grid grid-cols-2 gap-5">
-          <ul className="steps steps-vertical">
-            <li className="step step-primary">Idea tu proyecto</li>
-            <li className="step step-primary">Registrate en nuestra plataforma</li>
-            <li className="step">Agrega tu billetera y objetivos de recaudacion</li>
-            <li className="step">Publica tu proyecto y empeza a recibir fondos!</li>
-          </ul>
-          <div className="mockup-window border bg-base-300">
-            <div className="flex justify-right px-4 py-16 bg-base-200">
-              <div className="card w-96 bg-base-100 shadow-xl">
-                <figure><img src="/newhero.webp" alt="eth" /></figure>
-                <div className="card-body">
-                  <h2 className="card-title">
-                    Tu proyecto!
-                    <div className="badge badge-secondary">NUEVO</div>
-                  </h2>
-                  <p>Todos los detalles de tu proyecto revolucionario.</p>
-                  <div className="flex justify-between">
-                    <span className="text-lg font-medium text-success dark:text-white">559 USDT</span>
-                    <span className="text-lg font-medium text-success dark:text-white">43%</span>
-                  </div>
+          <div className="grid grid-cols-2 gap-5">
+            <ul className="steps steps-vertical">
+              <li className="step step-primary">Idea tu proyecto</li>
+              <li className="step step-primary">Registrate en nuestra plataforma</li>
+              <li className="step">Agrega tu billetera y objetivos de recaudacion</li>
+              <li className="step">Publica tu proyecto y empeza a recibir fondos!</li>
+            </ul>
+            <div className="mockup-window border bg-base-300">
+              <div className="flex justify-right px-4 py-16 bg-base-200">
+                <div className="card w-96 bg-base-100 shadow-xl">
+                  <figure><img src="/newhero.webp" alt="eth" /></figure>
+                  <div className="card-body">
+                    <h2 className="card-title">
+                      Tu proyecto!
+                      <div className="badge badge-secondary">NUEVO</div>
+                    </h2>
+                    <p>Todos los detalles de tu proyecto revolucionario.</p>
+                    <div className="flex justify-between">
+                      <span className="text-lg font-medium text-success dark:text-white">559 USDT</span>
+                      <span className="text-lg font-medium text-success dark:text-white">43%</span>
+                    </div>
 
-                  <progress className="progress progress-success w-full" value="43" max="100"></progress>
-                  <div className="card-actions justify-end">
-                    <div className="badge badge-outline">Tech</div>
-                    <div className="badge badge-outline">Innovacion</div>
+                    <progress className="progress progress-success w-full" value="43" max="100"></progress>
+                    <div className="card-actions justify-end">
+                      <div className="badge badge-outline">Tech</div>
+                      <div className="badge badge-outline">Innovacion</div>
+                    </div>
+                    <button className="btn btn-secondary rounded-full normal-case mt-10 text-lg text-white">Participar</button>
                   </div>
-                  <button className="btn btn-secondary rounded-full normal-case mt-10 text-lg text-white">Participar</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
         </section>
-
       </main>
     </div>
   )
