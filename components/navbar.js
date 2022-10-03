@@ -52,7 +52,7 @@ export default function Navbar(){
             {session && (
               <div className="avatar online placeholder">
                 <div className="bg-primary-focus text-neutral-content rounded-full w-11">
-                  <span className="text-l">{session["user"]["name"][0]}</span>
+                  <img src={session["user"]["image"]} referrerPolicy="no-referrer"/>
                 </div>
               </div> 
              )}
