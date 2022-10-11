@@ -4,7 +4,7 @@ export default function ProfileStats(props) {
   
       <div className="stat place-items-center">
         <div className="stat-title">Proyectos</div>
-        <div className="stat-value">3</div>
+        <div className="stat-value">4</div>
       </div>
       
       <div className="stat place-items-center">
