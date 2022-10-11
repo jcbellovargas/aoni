@@ -3,7 +3,7 @@ import { getScrubbedSelectedAddress } from "../utils/wallet-utils";
 import WalletModal from "./wallet-modal";
 import Link from 'next/link'
 import AccountContext from "../contexts/accountContext";
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signOut } from "next-auth/react"
 
 
 export default function Navbar(){
@@ -60,7 +60,9 @@ export default function Navbar(){
           {session && (
             <ul tabIndex="0" className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
               <li><a>Ajustes</a></li>
-              <li><a>Ver Perfil</a></li>
+              <Link href="/profile">
+                <li><a>Ver Perfil</a></li>
+              </Link>
               <li><a onClick={() => signOut()}>Cerrar Sesion</a></li>
             </ul>
           )}
