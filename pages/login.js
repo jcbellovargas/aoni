@@ -43,7 +43,7 @@ export default function Login({ providers }) {
             {providers.map(provider => {
               return (
                 <div key={provider.id} className="form-control mt-6">
-                  <button onClick={() => signIn(provider.id, { callbackUrl: `${window.location.origin}` })} className="btn btn-secondary">
+                  <button onClick={() => signIn(provider.id, { callbackUrl: `${window.location.origin}/profile` })} className="btn btn-secondary">
                     {providerLogo(provider.id)}
                     <span>{provider.name}</span>
                   </button>

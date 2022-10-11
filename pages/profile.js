@@ -1,5 +1,7 @@
 import { useSession } from "next-auth/react"
-import ProjectsTable from "../components/projects-table"
+import ProfileStats from "../components/profile/profile-stats"
+import ProjectsTable from "../components/profile/projects-table"
+import ProjectsTableRow from "../components/profile/projects-table-row"
 
 
 export default function Profile(props){
@@ -14,31 +16,10 @@ export default function Profile(props){
             <div className="card w-2/3 bg-base-100 shadow-xl">
               <div className="card-body">
                 <h2 className="card-title">{`Bienvenido ${session["user"]["name"]}!`}</h2>
-                <div className="card-actions justify-end">
-                </div>
-                <div className="stats shadow">
-  
-                  <div className="stat place-items-center">
-                    <div className="stat-title">Proyectos</div>
-                    <div className="stat-value">3</div>
-                  </div>
-                  
-                  <div className="stat place-items-center">
-                    <div className="stat-title">Total Recaudado</div>
-                    <div className="stat-value text-secondary">4,200 USDT</div>
-                  </div>
-                  
-                  <div className="stat place-items-center">
-                    <div className="stat-title">Donaciones totales</div>
-                    <div className="stat-value">27</div>
-                  </div>
-                  
-                </div>
+                <ProfileStats/>
                 <ProjectsTable/>
               </div>
             </div>
-            
-            
           </>
         )}
       </div>
