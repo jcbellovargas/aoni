@@ -1,11 +1,12 @@
 import { useSession } from "next-auth/react"
+import ProfileEdit from "../components/profile/profile-edit"
 import ProfileStats from "../components/profile/profile-stats"
 import ProjectsTable from "../components/profile/projects-table"
 import ProjectsTableRow from "../components/profile/projects-table-row"
 
 
-export default function Profile(props){
 
+export default function Profile(props){
   const { data: session, status } = useSession({required: true})
 
   return(
@@ -18,6 +19,7 @@ export default function Profile(props){
                 <h2 className="card-title">{`Bienvenido ${session["user"]["name"]}!`}</h2>
                 <ProfileStats/>
                 <ProjectsTable/>
+                <ProfileEdit session={session}/>
               </div>
             </div>
           </>
