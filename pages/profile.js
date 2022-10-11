@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react"
 import ProfileEdit from "../components/profile/profile-edit"
 import ProfileStats from "../components/profile/profile-stats"
 import ProjectsTable from "../components/profile/projects-table"
