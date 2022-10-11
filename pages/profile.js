@@ -1,13 +1,10 @@
-import { useSession } from "next-auth/react"
 import ProfileEdit from "../components/profile/profile-edit"
 import ProfileStats from "../components/profile/profile-stats"
 import ProjectsTable from "../components/profile/projects-table"
-import ProjectsTableRow from "../components/profile/projects-table-row"
 
 
-
-export default function Profile(props){
-  const { data: session, status } = useSession({required: true})
+export default function Profile(test){
+  const { data: session } = useSession({required: true})
 
   return(
     <>
