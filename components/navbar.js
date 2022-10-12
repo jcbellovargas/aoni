@@ -59,9 +59,11 @@ export default function Navbar(){
           </label>
           {session && (
             <ul tabIndex="0" className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-              <li><a>Ajustes</a></li>
               <Link href="/profile">
                 <li><a>Ver Perfil</a></li>
+              </Link>
+              <Link href="/new-project">
+                <li><a>Crear Proyecto</a></li>
               </Link>
               <li><a onClick={() => signOut()}>Cerrar Sesion</a></li>
             </ul>

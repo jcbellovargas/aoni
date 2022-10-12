@@ -4,7 +4,7 @@ import ProfileStats from "../components/profile/profile-stats"
 import ProjectsTable from "../components/profile/projects-table"
 
 
-export default function Profile(test){
+export default function Profile(){
   const { data: session } = useSession({required: true})
 
   return(
