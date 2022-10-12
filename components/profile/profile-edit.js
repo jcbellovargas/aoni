@@ -3,8 +3,10 @@ import { storage } from "../../firebase"
 import { ref, uploadBytes, getDownloadURL} from "firebase/storage"
 import { v4 } from 'uuid'
 import { postData } from "/utils/fetch-utils"
+import { useRouter } from 'next/router'
 
 export default function ProfileEdit(props){
+  const router = useRouter()
   const [profileImg, setProfileImg] = useState(props.session["user"]["image"]);
   const [imageUpload, setImageUpload] = useState(null);
   const inputRef = useRef(null);
@@ -50,6 +52,7 @@ export default function ProfileEdit(props){
   const saveProfile = async () => {
     const imageUrl = await uploadImgToStorage();
     await updateUser(imageUrl);
+    router.reload(window.location.pathname)
   }
 
   return(
@@ -58,7 +61,7 @@ export default function ProfileEdit(props){
       <input className="hidden" ref={inputRef} type="file" onChange={handleFileChange}/>
       <div className="card-body">
         <h2 className="card-title">Editar Perfil</h2>
-        <img className="mask mask-squircle w-20" src={profileImg} onClick={handleImageClick} />
+        <img className="mask mask-squircle w-20 cursor-pointer" src={profileImg} onClick={handleImageClick} />
         <div className="form-control w-full max-w-2xl">
           <label className="label">
             <span className="label-text">Nombre de usuario</span>
