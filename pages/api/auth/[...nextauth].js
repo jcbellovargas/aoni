@@ -6,6 +6,8 @@ import { FirestoreAdapter } from "@next-auth/firebase-adapter"
 
 import { db, app, firebaseConfig } from "../../../firebase"
 
+import { doc, getDoc } from "firebase/firestore";
+
 export default NextAuth({
   providers: [
     GoogleProvider({
@@ -33,11 +35,14 @@ export default NextAuth({
         return token
     },
     async session({session, token, user}) {
+      const docRef = await doc(db, "users", user.id)
+      const docSnap = await getDoc(docRef)
         session = {
             ...session,
             user: {
-                id: user.id,
-                ...session.user
+              id: user.id,
+              ...docSnap.data(),
+
             }
         }
         return session
@@ -45,4 +50,16 @@ export default NextAuth({
   }
 })
 
+
+
+// async session({session, token, user}) {
+//     session = {
+//         ...session,
+//         user: {
+//             id: user.id,
+//             ...session.user
+//         }
+//     }
+//     return session
+// }
 
