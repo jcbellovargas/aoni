@@ -7,7 +7,6 @@ import { postData } from "/utils/fetch-utils"
 export default function ProfileEdit(props){
   const [profileImg, setProfileImg] = useState(props.session["user"]["image"]);
   const [imageUpload, setImageUpload] = useState(null);
-  const [imageUrl, setImageUrl] = useState();
   const inputRef = useRef(null);
 
   const [userName, setUserName] = useState(props.session["user"]["name"]);
@@ -29,13 +28,10 @@ export default function ProfileEdit(props){
     if (!imageUpload) return;
     const imageRef = ref(storage, `images/${imageUpload.name}${v4()}`);
     await uploadBytes(imageRef, imageUpload);
-    const url = await getDownloadURL(imageRef);
-    console.log(`SET IMAGE URL ${url}`)
-    setImageUrl(url);
+    return await getDownloadURL(imageRef);
   }
 
-  const updateUser = async () => {
-    console.log(`POST URL ${imageUrl}`)
+  const updateUser = async (imageUrl) => {
     postData('/api/update_user', { 
       id: props.session["user"]["id"],
       name: userName,
@@ -52,8 +48,8 @@ export default function ProfileEdit(props){
   }
 
   const saveProfile = async () => {
-    await uploadImgToStorage();
-    await updateUser();
+    const imageUrl = await uploadImgToStorage();
+    await updateUser(imageUrl);
   }
 
   return(

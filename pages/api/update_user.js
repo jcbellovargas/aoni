@@ -18,8 +18,6 @@ import { doc, setDoc } from "firebase/firestore";
 
 export default async function handler(req, res) {
   const user = req.body
-  console.log("REQUEST BODY: "+JSON.stringify(user))
-  // return;
   const userRef = doc(db, "users", user.id)
   await setDoc(userRef, { ...user }, { merge: true });
   res.status(200).json({ user })
