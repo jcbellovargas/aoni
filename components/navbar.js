@@ -51,7 +51,7 @@ export default function Navbar(){
             )}
             {session && (
               <div className="avatar online placeholder">
-                <div className="bg-primary-focus text-neutral-content rounded-full w-11">
+                <div className="bg-transparent-focus text-neutral-content rounded-full w-11">
                   <img src={session["user"]["image"]} referrerPolicy="no-referrer"/>
                 </div>
               </div> 

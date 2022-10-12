@@ -1,6 +1,6 @@
 export default function ProfileStats(props) {
   return(
-    <div className="stats shadow">
+    <div className="stats shadow-lg mt-4">
   
       <div className="stat place-items-center">
         <div className="stat-title">Proyectos</div>
