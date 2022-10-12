@@ -1,12 +1,18 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { storage } from "../../firebase"
-import { ref, uploadBytes} from "firebase/storage"
+import { ref, uploadBytes, getDownloadURL} from "firebase/storage"
 import { v4 } from 'uuid'
+import { postData } from "/utils/fetch-utils"
 
 export default function ProfileEdit(props){
   const [profileImg, setProfileImg] = useState(props.session["user"]["image"]);
   const [imageUpload, setImageUpload] = useState(null);
+  const [imageUrl, setImageUrl] = useState();
   const inputRef = useRef(null);
+
+  const [userName, setUserName] = useState(props.session["user"]["name"]);
+  const [userEmail, setUserEmail] = useState(props.session["user"]["email"]);
+  const [userWalletAddress, setUserWalletAddress] = useState(props.session["user"]["walletAddress"]);
   
   const handleFileChange = (e) => {
     const file = e.target.files && e.target.files[0];
@@ -19,17 +25,35 @@ export default function ProfileEdit(props){
     inputRef.current.click()
   }
 
-  const saveProfile = async () => {
-    alert(JSON.stringify(process.env))
-    if(imageUpload){
-      const imageRef = ref(storage, `images/${imageUpload.name}${v4()}`);
-      const result = await uploadBytes(imageRef, imageUpload)
-      alert(result);
-      // const fireRef = storageRef.child(file.name);
-      // await fireRef.put(file);
-      // const fileUrl = await fileRef.getDownloadURL();
-    }
+  const uploadImgToStorage = async () => {
+    if (!imageUpload) return;
+    const imageRef = ref(storage, `images/${imageUpload.name}${v4()}`);
+    await uploadBytes(imageRef, imageUpload);
+    const url = await getDownloadURL(imageRef);
+    console.log(`SET IMAGE URL ${url}`)
+    setImageUrl(url);
+  }
 
+  const updateUser = async () => {
+    console.log(`POST URL ${imageUrl}`)
+    postData('/api/update_user', { 
+      id: props.session["user"]["id"],
+      name: userName,
+      image: imageUrl,
+      walletAddress: userWalletAddress
+    })
+    .then(data => {
+      console.log(data); // JSON data parsed by `data.json()` call
+    });
+  }
+
+  const disableSave = () => {
+    return (!!!userWalletAddress || !!!userName);
+  }
+
+  const saveProfile = async () => {
+    await uploadImgToStorage();
+    await updateUser();
   }
 
   return(
@@ -43,22 +67,16 @@ export default function ProfileEdit(props){
           <label className="label">
             <span className="label-text">Nombre de usuario</span>
           </label>
-          <input type="text" value={props.session["user"]["name"]} placeholder="Nombre" className="input input-bordered w-full" />
+          <input type="text" defaultValue={userName} placeholder="Nombre" className="input input-bordered w-full" onChange={(e) => setUserName(e.target.value)} />
         </div>
         <div className="form-control w-full max-w-2xl">
           <label className="label">
-            <span className="label-text">Email</span>
+            <span className="label-text">Wallet por default para todos los proyectos</span>
           </label>
-          <input type="text" value={props.session["user"]["email"]} placeholder="Email" className="input input-bordered w-full" />
-        </div>
-        <div className="form-control w-full max-w-2xl">
-          <label className="label">
-            <span className="label-text">Wallet Address</span>
-          </label>
-          <input type="text" value={props.session["user"]["wallet"]} placeholder="Wallet Address" className="input input-bordered w-full" />
+          <input type="text" defaultValue={userWalletAddress} placeholder="Wallet Address" className="input input-bordered w-full" onChange={(e) => setUserWalletAddress(e.target.value)}/>
         </div>
         <div className="card-actions justify-end">
-          <button onClick={saveProfile} className="btn btn-primary">Guardar</button>
+          <button onClick={saveProfile} className="btn btn-primary" disabled={disableSave()}>Guardar</button>
         </div>
       </div>
     </div>
