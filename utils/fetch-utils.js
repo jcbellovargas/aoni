@@ -1,6 +1,5 @@
-// Ejemplo implementando el metodo POST:
 export const postData = async (url = '', data = {}) => {
-  // Opciones por defecto estan marcadas con un *
+  // Default options with *
   const response = await fetch(url, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
@@ -15,3 +14,4 @@ export const postData = async (url = '', data = {}) => {
   });
   return response.json(); // parses JSON response into native JavaScript objects
 }
+
