@@ -10,7 +10,6 @@ export default function ProfileEdit(props){
   const inputRef = useRef(null);
 
   const [userName, setUserName] = useState(props.session["user"]["name"]);
-  const [userEmail, setUserEmail] = useState(props.session["user"]["email"]);
   const [userWalletAddress, setUserWalletAddress] = useState(props.session["user"]["walletAddress"]);
   
   const handleFileChange = (e) => {
