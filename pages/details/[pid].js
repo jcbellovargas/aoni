@@ -31,6 +31,7 @@ export default function Details() {
       <div className="hero min-h-screen rounded-full bg-primary bg-opacity-5">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img src="https://placeimg.com/640/480/tech" className="max-w-xl rounded-lg shadow-2xl" />
+          {/* <img src="https://placeimg.com/840/680/tech" className=" rounded-lg shadow-2xl w-[640px] h-[480px]" /> */}
           <div>
             <h1 className="text-5xl font-bold">Nombre Proyecto</h1>
             <h1 className='text-xl'>de Creador projecto</h1>

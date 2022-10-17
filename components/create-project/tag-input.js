@@ -18,7 +18,6 @@ export default function TagInput(){
     { id: 'Redes Sociales', text: 'Redes Sociales' },
 
   ];
-  debugger;
 
   const handleDelete = i => {
     setTags(tags.filter((tag, index) => index !== i));
