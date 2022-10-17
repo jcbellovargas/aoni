@@ -3,9 +3,6 @@ import { useState, useRef, useEffect } from "react"
 import TagInput from "../components/create-project/tag-input"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { getSystemErrorName } from "util";
-
-
 
 export default function NewProject(){
   const { data: session } = useSession({required: true})
@@ -35,7 +32,8 @@ export default function NewProject(){
   const handleFileChange = (e) => {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
-    // if (!isImageFile(file)) throw new Error("Not an image");
+    if (!isImageFile(file)) return;
+  
     setProjectImage(file);
     setDisplayImage(URL.createObjectURL(file));
   }
@@ -106,7 +104,7 @@ export default function NewProject(){
                     <span className="label-text">Imagen del proyecto</span>
                   </label>
                   <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileChange}/>
-                  <input type="text" value={projectImage.name} placeholder="Tamaño recomendado de 640x480" className="input input-bordered input-primary w-full" onClick={handleImageInputClick}/>
+                  <input type="text" value={projectImage.name} placeholder="Tamaño recomendado de 640x480" className="input input-bordered input-primary w-full cursor-pointer" onClick={handleImageInputClick}/>
                 </div>
 
                 <div className="card-actions justify-end">
@@ -114,7 +112,7 @@ export default function NewProject(){
                 </div>
               </div>
             </div>
-            <img onClick={handleImageInputClick} src={displayImage} className=" mt-40 rounded-lg shadow-2xl w-[640px] h-[480px]" />
+            <img onClick={handleImageInputClick} src={displayImage} className="cursor-pointer mt-40 rounded-lg shadow-2xl w-[640px] h-[480px]" />
           </div>
         )}
       </div>
