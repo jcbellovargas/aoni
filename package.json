@@ -17,7 +17,9 @@
     "next": "^12.2.5",
     "next-auth": "^4.12.2",
     "react": "18.1.0",
+    "react-datepicker": "^4.8.0",
     "react-dom": "18.1.0",
+    "react-tag-input-latest": "^4.5.9",
     "react-tsparticles": "^2.2.4",
     "tsparticles": "^2.2.4"
   },

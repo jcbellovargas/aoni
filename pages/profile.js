@@ -9,7 +9,7 @@ export default function Profile(){
 
   return(
     <>
-      <div className="grid justify-items-center">
+      <div className="grid justify-items-center mb-10">
         { session && (
           <>
             <div className="card w-2/3 bg-base-100 shadow-xl">
