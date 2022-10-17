@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import { storage } from "../../firebase"
-import { ref, uploadBytes, getDownloadURL} from "firebase/storage"
-import { v4 } from 'uuid'
 import { postData } from "/utils/fetch-utils"
+import { uploadImgToStorage } from "/utils/file-utils"
 import { useRouter } from 'next/router'
 
 export default function ProfileEdit(props){
@@ -26,13 +24,6 @@ export default function ProfileEdit(props){
     inputRef.current.click()
   }
 
-  const uploadImgToStorage = async () => {
-    if (!imageUpload) return;
-    const imageRef = ref(storage, `images/${imageUpload.name}${v4()}`);
-    await uploadBytes(imageRef, imageUpload);
-    return await getDownloadURL(imageRef);
-  }
-
   const updateUser = async (imageUrl) => {
     postData('/api/update_user', { 
       id: props.session["user"]["id"],
@@ -50,7 +41,7 @@ export default function ProfileEdit(props){
   }
 
   const saveProfile = async () => {
-    const imageUrl = await uploadImgToStorage();
+    const imageUrl = await uploadImgToStorage(imageUpload);
     await updateUser(imageUrl);
     router.reload(window.location.pathname)
   }

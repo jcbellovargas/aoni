@@ -1,6 +1,8 @@
 import { useSession } from "next-auth/react"
 import { useState, useRef, useEffect } from "react"
 import TagInput from "../components/create-project/tag-input"
+import { isImageFile } from "/utils/file-utils"
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -36,10 +38,6 @@ export default function NewProject(){
   
     setProjectImage(file);
     setDisplayImage(URL.createObjectURL(file));
-  }
-
-  function isImageFile(file) {
-    return file && file['type'].split('/')[0] === 'image';
   }
 
   const handleImageInputClick = () => {
