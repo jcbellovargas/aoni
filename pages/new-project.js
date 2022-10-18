@@ -1,7 +1,11 @@
 import { useSession } from "next-auth/react"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
+import { useRouter } from 'next/router'
 import TagInput from "../components/create-project/tag-input"
-import { isImageFile } from "/utils/file-utils"
+import { isImageFile, uploadImgToStorage } from "/utils/file-utils"
+import { postData } from "/utils/fetch-utils"
+import LoadingModal from '/components/loading-modal'
+
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,6 +21,8 @@ export default function NewProject(){
   const [projectWallet, setProjectWallet] = useState()
   const [projectDeadline, setProjectDeadline] = useState()
   const fileInputRef = useRef(null);
+  const loadingModalRef = useRef(null);
+  const router = useRouter();
 
   const tagOptions = [    
     { id: 'Salud', text: 'Salud' },
@@ -44,12 +50,24 @@ export default function NewProject(){
     fileInputRef.current.click()
   }
 
-  const handleCreateButtonClick = () => {
-    alert([projectName, projectDescription, projectTags, projectFundingGoal, projectWallet, projectDeadline, projectImage])
+  const createProject = async () => {
+    loadingModalRef.current.click();
+    const projectImageUrl = await uploadImgToStorage(projectImage);
+    const result = await postData('/api/create_project', { 
+      name: projectName,
+      description: projectDescription,
+      fundingGoal: projectFundingGoal,
+      tags: projectTags,
+      wallet: projectWallet,
+      deadline: projectDeadline,
+      image: projectImageUrl
+    })
+    console.log(result)
+    router.reload(window.location.pathname)
   }
 
   const createButtonEnabled = () => {
-    return (projectName && projectDescription && projectFundingGoal && projectWallet && projectDeadline && projectImage)
+    return (projectName && projectDescription && projectFundingGoal && projectTags && projectWallet && projectDeadline && projectImage)
   }
 
   return(
@@ -106,7 +124,7 @@ export default function NewProject(){
                 </div>
 
                 <div className="card-actions justify-end">
-                  <button onClick={handleCreateButtonClick} className="btn btn-primary" disabled={!createButtonEnabled()}>Crear Proyecto</button>
+                  <button onClick={createProject} className="btn btn-primary" disabled={!createButtonEnabled()}>Crear Proyecto</button>
                 </div>
               </div>
             </div>
@@ -114,6 +132,8 @@ export default function NewProject(){
           </div>
         )}
       </div>
+      <label ref={loadingModalRef} htmlFor="loading-modal" className="h-0 w-0 invisible"/>
+      <LoadingModal msg={"Creando proyecto"}/>
     </>
   )
 }
