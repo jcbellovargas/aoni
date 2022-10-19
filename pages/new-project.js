@@ -53,17 +53,23 @@ export default function NewProject(){
   const createProject = async () => {
     loadingModalRef.current.click();
     const projectImageUrl = await uploadImgToStorage(projectImage);
-    const result = await postData('/api/create_project', { 
-      name: projectName,
-      description: projectDescription,
-      fundingGoal: projectFundingGoal,
-      tags: projectTags,
-      wallet: projectWallet,
-      deadline: projectDeadline,
-      image: projectImageUrl
-    })
-    console.log(result)
-    router.reload(window.location.pathname)
+    try{
+      const result = await postData('/api/create_project', { 
+        name: projectName,
+        description: projectDescription,
+        fundingGoal: projectFundingGoal,
+        tags: projectTags,
+        wallet: projectWallet,
+        deadline: projectDeadline,
+        image: projectImageUrl
+      })
+      console.log(result)
+    } catch(error){
+      console.log(error);
+      alert(error)
+    }
+
+    router.push("/profile")
   }
 
   const createButtonEnabled = () => {
