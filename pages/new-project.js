@@ -5,6 +5,7 @@ import TagInput from "../components/create-project/tag-input"
 import { isImageFile, uploadImgToStorage } from "/utils/file-utils"
 import { postData } from "/utils/fetch-utils"
 import LoadingModal from '/components/loading-modal'
+import ErrorModal from '/components/error-modal'
 
 
 import DatePicker from "react-datepicker";
@@ -20,8 +21,10 @@ export default function NewProject(){
   const [projectFundingGoal, setProjectFundingGoal] = useState()
   const [projectWallet, setProjectWallet] = useState()
   const [projectDeadline, setProjectDeadline] = useState()
+  const [errorMessage, setErrorMessage] = useState("")
   const fileInputRef = useRef(null);
   const loadingModalRef = useRef(null);
+  const errorModalRef = useRef(null);
   const router = useRouter();
 
   const tagOptions = [    
@@ -52,9 +55,9 @@ export default function NewProject(){
 
   const createProject = async () => {
     loadingModalRef.current.click();
-    const projectImageUrl = await uploadImgToStorage(projectImage);
-    try{
-      const result = await postData('/api/create_project', { 
+    try {
+      const projectImageUrl = await uploadImgToStorage(projectImage);
+      const response = await postData('/api/create_project', { 
         name: projectName,
         description: projectDescription,
         fundingGoal: projectFundingGoal,
@@ -63,13 +66,22 @@ export default function NewProject(){
         deadline: projectDeadline,
         image: projectImageUrl
       })
-      console.log(result)
-    } catch(error){
+      console.log(response)
+      if (response.error){
+        showError(`Hubo un error al crear el proyecto: \n${error}`);
+      } else {
+        router.push("/profile")
+      }
+    } catch(error) {
       console.log(error);
-      alert(error)
+      showError(`Hubo un error al crear el proyecto: \n${error}`);
     }
+    loadingModalRef.current.click();
+  }
 
-    router.push("/profile")
+  const showError = (msg) => {
+    setErrorMessage(msg)
+    errorModalRef.current.click();
   }
 
   const createButtonEnabled = () => {
@@ -138,8 +150,9 @@ export default function NewProject(){
           </div>
         )}
       </div>
-      <label ref={loadingModalRef} htmlFor="loading-modal" className="h-0 w-0 invisible"/>
-      <LoadingModal msg={"Creando proyecto"}/>
+
+      <LoadingModal msg={"Creando proyecto"} openRef={loadingModalRef}/>
+      <ErrorModal msg={errorMessage} openRef={errorModalRef}/>
     </>
   )
 }
