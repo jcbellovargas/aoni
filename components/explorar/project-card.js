@@ -3,23 +3,24 @@ import Link from 'next/link'
 export default function ProjectCard(props) {
   return(
     <>
-      <Link href="/details/123123">
+      <Link href={`/details/${props.project.id}`}>
         <div className="card w-3/4 bg-base-100 shadow-xl transition duration-100 hover:scale-105 hover:bg-white-600 cursor-pointer">
-          <figure><img src="https://placeimg.com/640/320/tech" alt="Shoes" /></figure>
+          <figure><img src={props.project.image} alt="Img" className="w-[640px] h-[280px]" /></figure>
           <div className="card-body">
             <h2 className="card-title">
-              Tu proyecto!
+              {props.project.name}
               <div className="badge badge-secondary">NUEVO</div>
             </h2>
-            <p>Pequeña descripcion de tu proyecto revolucionario.</p>
+            <p>{props.project.description}</p>
             <div className="flex justify-between">
-              <span className="text-lg font-medium text-success dark:text-white">559 USDT</span>
-              <span className="text-lg font-medium text-success dark:text-white">43%</span>
+              <span className="text-lg font-medium text-success dark:text-white">{`${props.project.currentBalance.amount} ${props.project.currentBalance.token}`}</span>
+              <span className="text-lg font-medium text-success dark:text-white">{`${props.project.fundingGoalProgress}%`}</span>
             </div>
-            <progress className="progress progress-success w-full" value="43" max="100"></progress>
+            <progress className="progress progress-success w-full" value={props.project.fundingGoalProgress} max="100"></progress>
             <div className="card-actions justify-end">
-              <div className="badge badge-outline">Tecnologia</div>
-              <div className="badge badge-outline">Redes Sociales</div>
+              {props.project.tags.map((tag) => {
+                return(<div key={tag} className="badge badge-outline">{tag}</div>)
+              })}
             </div>
           </div>
         </div>
