@@ -125,7 +125,7 @@ export default function NewProject(){
                   <label className="label">
                     <span className="label-text">Wallet address del proyecto</span>
                   </label>
-                  <input type="text" onChange={(e) => {setProjectWallet(e.target.value)}} placeholder="Wallet en la que se cobraran las recaudaciones" className="input input-bordered input-primary w-full"/>
+                  <input type="text" onChange={(e) => {setProjectWallet(e.target.value)}} defaultValue={session.user.walletAddress} placeholder="Wallet en la que se cobraran las recaudaciones" className="input input-bordered input-primary w-full"/>
                 </div>
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">
