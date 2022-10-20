@@ -9,6 +9,7 @@ export default function ProjectsTable(props) {
           <tr>
             <th>Proyecto</th>
             <th>Estado</th>
+            <th>Wallet</th>
             <th>Donaciones</th>
             <th>Recaudacion</th>
             <th>Tiempo Restante</th>
@@ -17,7 +18,7 @@ export default function ProjectsTable(props) {
         </thead>
         <tbody>
           {props.projects.map((project) => {
-            return (<ProjectsTableRow key={project.id} project={project}/>)
+            return (<ProjectsTableRow key={project.id} project={project} user={props.user}/>)
           })}
         </tbody>
         

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { scrubAddress } from "/utils/wallet-utils"
 
 export default function ProjectsTableRow(props) {
   return(
@@ -15,13 +16,13 @@ export default function ProjectsTableRow(props) {
             {props.project.tags.map((tag) => {
               return(<span key={tag} className="badge badge-ghost badge-sm">{tag}</span>)
             })}
-            
           </div>
         </div>
       </td>
       <td>
         <div className="badge badge-accent text-lg">{props.project.status}</div>
       </td>
+      <td>{scrubAddress(props.user.walletAddress)}</td>
       <td>{props.project.donationsAmount}</td>
       <td>
         <div className="flex justify-between">
