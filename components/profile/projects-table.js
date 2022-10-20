@@ -9,6 +9,7 @@ export default function ProjectsTable(props) {
           <tr>
             <th>Proyecto</th>
             <th>Estado</th>
+            <th>Donaciones</th>
             <th>Recaudacion</th>
             <th>Tiempo Restante</th>
             <th></th>

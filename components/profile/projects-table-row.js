@@ -7,7 +7,7 @@ export default function ProjectsTableRow(props) {
         <div className="flex items-center space-x-3">
           <div className="avatar">
             <div className="mask mask-squircle w-12 h-12">
-              <img src={props.project.image} alt="Avatar Tailwind CSS Component" />
+              <img src={props.project.image} alt="Project Image" />
             </div>
           </div>
           <div>
@@ -22,6 +22,7 @@ export default function ProjectsTableRow(props) {
       <td>
         <div className="badge badge-accent text-lg">{props.project.status}</div>
       </td>
+      <td>{props.project.donationsAmount}</td>
       <td>
         <div className="flex justify-between">
           <span className="text-m font-medium text-success dark:text-white">{`${props.project.currentBalance.amount} ${props.project.currentBalance.token}`}</span>

@@ -12,6 +12,7 @@ export default async function handler(req, res) {
       project.currentBalance = mockCurrentBalance(project)
       project.fundingGoalProgress = mockfundingGoalProgress(project)
       project.remainingDays = mockRemainingDays(project)
+      project.donationsAmount = mockDonationsAmount()
     })
 
     res.status(200).json({ projects })
@@ -55,5 +56,9 @@ const mockRemainingDays = (project) => {
   const daysRemaining = timeRemaining / (1000 * 3600 * 24);
   return parseInt(daysRemaining)
 
+}
+
+const mockDonationsAmount = () => {
+  return parseInt(randomNumber(5,38))
 }
 
