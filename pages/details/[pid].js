@@ -50,8 +50,8 @@ export default function Details(props) {
       {!loading && (
         <div className="hero min-h-screen rounded-full bg-primary bg-opacity-5">
           <div className="hero-content flex-col lg:flex-row-reverse">
-            <img src={projectDetails.image} className=" rounded-lg shadow-2xl w-[640px] h-[480px]" />
-            <div>
+            <img src={projectDetails.image} className="ml-20 rounded-lg shadow-2xl w-[640px] h-[480px]" />
+            <div className="w-[600px]">
               <h1 className="text-5xl font-bold">{projectDetails.name}</h1>
               <h1 className='text-xl'>de Creador projecto</h1>
               <p className="py-6">{projectDetails.description}</p>
@@ -60,7 +60,7 @@ export default function Details(props) {
                   <span className="text-lg font-medium text-black dark:text-white">{`${projectDetails.currentBalance.amount} ${projectDetails.currentBalance.token}`}</span>
                   <span className="text-lg font-small text-black dark:text-white">{`${projectDetails.fundingGoalProgress}% de ${projectDetails.fundingGoal.amount} ${projectDetails.fundingGoal.token}`}</span>
                 </div>
-                <progress className="progress progress-success w-2/3  float-left" value="70" max="100"></progress>
+                <progress className="progress progress-success w-2/3  float-left" value={projectDetails.fundingGoalProgress} max="100"></progress>
                 <span className="text-lg font-small text-black dark:text-white">{`Quedan ${projectDetails.remainingDays} dias`}</span>
                 <button onClick={handleCheckoutButtonClick} className="btn btn-secondary rounded-full w-2/3 mt-6">Participar</button>
                 {address && (
