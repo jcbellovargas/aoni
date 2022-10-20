@@ -18,7 +18,7 @@ export default function NewProject(){
   const [projectName, setProjectName] = useState()
   const [projectDescription, setProjectDescription] = useState()
   const [projectTags, setProjectTags] = useState([])
-  const [projectFundingGoal, setProjectFundingGoal] = useState()
+  const [projectFundingGoal, setProjectFundingGoal] = useState({})
   const [projectWallet, setProjectWallet] = useState()
   const [projectDeadline, setProjectDeadline] = useState()
   const [errorMessage, setErrorMessage] = useState("")
@@ -61,10 +61,11 @@ export default function NewProject(){
         name: projectName,
         description: projectDescription,
         fundingGoal: projectFundingGoal,
-        tags: projectTags,
+        tags: projectTags.map((t) => { return t.id }),
         wallet: projectWallet,
         deadline: projectDeadline,
-        image: projectImageUrl
+        image: projectImageUrl,
+        user: session.user.id
       })
       console.log(response)
       if (response.error){
@@ -118,7 +119,7 @@ export default function NewProject(){
                   <label className="label">
                     <span className="label-text">Objetivo a recaudar (USDT)</span>
                   </label>
-                  <input type="number" placeholder="Monto objetivo en USDT" className="input input-bordered input-primary w-full" onChange={(e) => {setProjectFundingGoal(e.target.value)}}/>
+                  <input type="number" placeholder="Monto objetivo en USDT" className="input input-bordered input-primary w-full" onChange={(e) => {setProjectFundingGoal({token: "USDT", amount: e.target.value})}}/>
                 </div>
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">

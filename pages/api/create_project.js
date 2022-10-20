@@ -14,7 +14,8 @@ export default async function handler(req, res) {
       deadline: project.deadline,
       image: project.image,
       createdAt: new Date(),
-      status: "ACTIVE"
+      status: "ACTIVE",
+      user: project.user
     });
     console.log("Document written with ID: ", docRef.id);
     res.status(200).json({ response: docRef })
