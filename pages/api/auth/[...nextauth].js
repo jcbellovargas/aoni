@@ -31,12 +31,12 @@ export default NextAuth({
   },
   callbacks: {
     async jwt({token, user}) {
-        user && (token.user = user)
-        return token
+        user && (token.user = user);
+        return token;
     },
     async session({session, token, user}) {
-      const docRef = await doc(db, "users", user.id)
-      const docSnap = await getDoc(docRef)
+      const docRef = await doc(db, "users", user.id);
+      const docSnap = await getDoc(docRef);
         session = {
             ...session,
             user: {
@@ -45,21 +45,8 @@ export default NextAuth({
 
             }
         }
-        return session
+        return session;
     }
   }
 })
-
-
-
-// async session({session, token, user}) {
-//     session = {
-//         ...session,
-//         user: {
-//             id: user.id,
-//             ...session.user
-//         }
-//     }
-//     return session
-// }
 
