@@ -1,8 +1,10 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { getData } from "/utils/fetch-utils"
 import ProjectsTableRow from "./projects-table-row"
 
 export default function ProjectsTable(props) {
+
+  const [projects, setProjects] = useState([])
 
   useEffect(() => {
     const get_user_projects = async () => {
@@ -10,10 +12,10 @@ export default function ProjectsTable(props) {
         const response = await getData('/api/get_user_projects', {
           user: props.user
         })
-        console.log(JSON.stringify(response.projects))
         if (response.error){
-          // showError(`Hubo un error al crear el proyecto: \n${error}`);
+          console.log(error);
         }
+        setProjects(response.projects)
       } catch(error) {
         console.log(error);
       }
@@ -34,10 +36,9 @@ export default function ProjectsTable(props) {
           </tr>
         </thead>
         <tbody>
-          <ProjectsTableRow/>
-          <ProjectsTableRow/>
-          <ProjectsTableRow/>
-          <ProjectsTableRow/>
+          {projects.map((project) => {
+            return (<ProjectsTableRow key={project.id} project={project}/>)
+          })}
         </tbody>
         
       </table>

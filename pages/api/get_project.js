@@ -1,37 +1,38 @@
 import { db } from "../../firebase"
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDoc, doc } from "firebase/firestore";
 
 export default async function handler(req, res) {
   try {
     const req_payload = req.query
 
-    let projects = await fetchDatabaseProjects(req_payload.user)
+    let project = await fetchDatabaseProject(req_payload.id)
     
-    projects.forEach((project) => {
-      // TODO fetch blockchain data (current balance)
-      project.currentBalance = mockCurrentBalance(project)
-      project.fundingGoalProgress = mockfundingGoalProgress(project)
-      project.remainingDays = mockRemainingDays(project)
-    })
 
-    res.status(200).json({ projects })
+    project.currentBalance = mockCurrentBalance(project)
+    project.fundingGoalProgress = mockfundingGoalProgress(project)
+    project.remainingDays = mockRemainingDays(project)
+
+    res.status(200).json({ project })
   } catch (error){
     console.log(error)
-    res.status(500).json({ error: "Failed to fetch projects" })
+    res.status(500).json({ error: "Failed to fetch project" })
   }
 }
 
-const fetchDatabaseProjects = async (user) => {
-  const projectsRef = collection(db, "projects");
-  const q = query(projectsRef, where("user", "==", user));
-  const querySnapshot = await getDocs(q);
+const fetchDatabaseProject = async (id) => {
+  const projectRef = doc(db, "projects", id);
+  const projectSnap = await getDoc(projectRef);
 
-  let projects = []
-  querySnapshot.forEach((doc) => {
-    projects.push({ id: doc.id, ...doc.data() })
-  });
+  let project = {};
+  if (projectSnap.exists()) {
+    console.log("Document data:", projectSnap.data());
+    project = {id: projectSnap.id, ...projectSnap.data()}
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
 
-  return projects
+  return project;
 }
 
 /////////////////// MOCK FUNCTIONS

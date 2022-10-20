@@ -1,19 +1,39 @@
-import { useRouter } from 'next/router'
+import { useRouter, isReady } from 'next/router'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { getBalance } from "/utils/wallet-utils";
 import CheckoutModal from '../../components/checkout-modal'
 import AccountContext from '../../contexts/accountContext';
 import WalletModal from '../../components/wallet-modal';
+import { getData } from "/utils/fetch-utils"
 
-export default function Details() {
+export default function Details(props) {
   const router = useRouter();
   const { pid } = router.query;
 
   const [currentAccountBalance, setCurrentAccountBalance] = useState(0);
   const {address, setAddress} = useContext(AccountContext);
+  const [projectDetails, setProjectDetails] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const walletModalRef = useRef(null);
   const checkoutModalRef = useRef(null);
+
+  useEffect(() => {
+    if(!pid) return;
+    const fetchProjectDetails = async (id) => {
+      try {
+        const response = await getData('/api/get_project', { id: id })
+        if (response.error){
+          console.log(error);
+        }
+        setProjectDetails(response.project)
+        setLoading(false);
+      } catch(error) {
+        console.log(error);
+      }
+    }
+    fetchProjectDetails(pid);
+  },[pid])
 
   const handleCheckoutButtonClick = async () => {
     if(!!address){
@@ -27,36 +47,36 @@ export default function Details() {
 
   return (
     <>
-      {/* Project id {pid} */}
-      <div className="hero min-h-screen rounded-full bg-primary bg-opacity-5">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <img src="https://placeimg.com/640/480/tech" className="max-w-xl rounded-lg shadow-2xl" />
-          {/* <img src="https://placeimg.com/840/680/tech" className=" rounded-lg shadow-2xl w-[640px] h-[480px]" /> */}
-          <div>
-            <h1 className="text-5xl font-bold">Nombre Proyecto</h1>
-            <h1 className='text-xl'>de Creador projecto</h1>
-            <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitaiditateiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationeiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationeiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationeiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitatione voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationeiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationeiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationeiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationeiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationeiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationeiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationeiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationetionem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-            <div className='flex flex-col'>
-              <div className="flex justify-between w-2/3">
-                <span className="text-lg font-medium text-black dark:text-white">559 USDT</span>
-                <span className="text-lg font-small text-black dark:text-white">43% de 1300 USDT</span>
+      {!loading && (
+        <div className="hero min-h-screen rounded-full bg-primary bg-opacity-5">
+          <div className="hero-content flex-col lg:flex-row-reverse">
+            <img src={projectDetails.image} className=" rounded-lg shadow-2xl w-[640px] h-[480px]" />
+            <div>
+              <h1 className="text-5xl font-bold">{projectDetails.name}</h1>
+              <h1 className='text-xl'>de Creador projecto</h1>
+              <p className="py-6">{projectDetails.description}</p>
+              <div className='flex flex-col'>
+                <div className="flex justify-between w-2/3">
+                  <span className="text-lg font-medium text-black dark:text-white">{`${projectDetails.currentBalance.amount} ${projectDetails.currentBalance.token}`}</span>
+                  <span className="text-lg font-small text-black dark:text-white">{`${projectDetails.fundingGoalProgress}% de ${projectDetails.fundingGoal.amount} ${projectDetails.fundingGoal.token}`}</span>
+                </div>
+                <progress className="progress progress-success w-2/3  float-left" value="70" max="100"></progress>
+                <span className="text-lg font-small text-black dark:text-white">{`Quedan ${projectDetails.remainingDays} dias`}</span>
+                <button onClick={handleCheckoutButtonClick} className="btn btn-secondary rounded-full w-2/3 mt-6">Participar</button>
+                {address && (
+                  <>
+                    <label ref={checkoutModalRef} htmlFor="checkout-modal" className="h-0 w-0 invisible"/>
+                    <CheckoutModal currentAccountBalance={currentAccountBalance}/>
+                  </>
+                )}
+                <label ref={walletModalRef} htmlFor="connect-wallet" className="h-0 w-0 invisible"/>
+                <WalletModal isWalletConnected={false} selectedAddress={"address"}/>
               </div>
-              <progress className="progress progress-success w-2/3  float-left" value="70" max="100"></progress>
-              <span className="text-lg font-small text-black dark:text-white">Quedan 24 dias</span>
-              <button onClick={handleCheckoutButtonClick} className="btn btn-secondary rounded-full w-2/3 mt-6">Participar</button>
-              {address && (
-                <>
-                  <label ref={checkoutModalRef} htmlFor="checkout-modal" className="h-0 w-0 invisible"/>
-                  <CheckoutModal currentAccountBalance={currentAccountBalance}/>
-                </>
-              )}
-
-              <label ref={walletModalRef} htmlFor="connect-wallet" className="h-0 w-0 invisible"/>
-              <WalletModal isWalletConnected={false} selectedAddress={"address"}/>
             </div>
           </div>
-        </div>
-      </div>
+        </div>    
+      )}
+
     </>
   )
 }
