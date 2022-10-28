@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, useContext } from "react";
-import { getTokenSymbol, sendTransaction, getBalance } from "../utils/wallet-utils";
+import { useState, useEffect, useContext } from "react";
+import { getTokenSymbol, sendDepositTransaction, sendApproveSpenderTransaction } from "../utils/wallet-utils";
 import AccountContext from "../contexts/accountContext";
 
 export default function CheckoutModal(props) {
@@ -10,8 +10,6 @@ export default function CheckoutModal(props) {
   const [tokenSymbol, setTokenSymbol] = useState('USDT');
   const [transactionHash, setTransactionHash] = useState("");
   const { address } = useContext(AccountContext);
-
-  const SEND_TO_ADDRESS = "0x574962854630D8dFAAFBe80Cdc8AF13E019a7CC3"
 
   const handleCloseClick = () => {
     setShowTransactionConfirmation(false);
@@ -25,7 +23,8 @@ export default function CheckoutModal(props) {
 
   const handleTransferOnClick = async () => {
     setTransactionInProgress(true)
-    const transaction = await sendTransaction(transferAmount, SEND_TO_ADDRESS)
+    await sendApproveSpenderTransaction(transferAmount);
+    const transaction = await sendDepositTransaction(transferAmount);
     if (!!transaction.hash){
       setShowTransactionConfirmation(true);
       setTransactionHash(transaction.hash);

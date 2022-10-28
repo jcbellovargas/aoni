@@ -1,12 +1,24 @@
 const { ethers } = require("ethers");
-const TETHER_CONTRACT_ABI = require("/artifacts/contracts/Tether.sol/Tether.json");
-const TETHER_CONTACT_ADDRESS = '0xD19230e27095C33C4F722E7E420AFF190e5F2553'; // Goerli testnet contract
+const TETHER_CONTRACT_ABI = require("/artifacts/contracts/Tether.sol/Tether.json").abi;
+// const TETHER_CONTRACT_ADDRESS = '0xD19230e27095C33C4F722E7E420AFF190e5F2553'; // Goerli testnet contract
+const TETHER_CONTRACT_ADDRESS = '0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0'; // localhost contract
 
+const TESTCONTRACT_CONTRACT_ADDRESS = '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9'; // localhost contract
+const TESTCONTRACT_CONTRACT_ABI = require("/artifacts/contracts/TestContract.sol/TestContract.json").abi;
+
+
+export const getContract = async (address, abi ) => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+  const contract = new ethers.Contract(address, abi, provider.getSigner());
+  return contract
+}
 
 export const getUSDTContract = async () => {
-  const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-  const contract = new ethers.Contract(TETHER_CONTACT_ADDRESS, TETHER_CONTRACT_ABI.abi, provider.getSigner());
-  return contract
+  return getContract(TETHER_CONTRACT_ADDRESS, TETHER_CONTRACT_ABI);
+}
+
+export const getDepositContract = async () => {
+  return getContract(TESTCONTRACT_CONTRACT_ADDRESS, TESTCONTRACT_CONTRACT_ABI);
 }
 
 export const authWallet = async () => {
@@ -47,14 +59,29 @@ export const getBalance = async () => {
   return ethers.utils.formatUnits(ownerBalance, balanceDecimals)
 }
 
-export const sendTransaction = async (amount, to) => {
+export const sendDepositTransaction = async (amount) => {
+  const depositContract = await getDepositContract();
+  const usdtContract = await getUSDTContract();
+  const decimals = await usdtContract.decimals();
+  const sendAmount = ethers.utils.parseUnits(amount, decimals);
+  let tx;
+  try {
+    tx = await depositContract.deposit(sendAmount);
+  } catch(error){
+    tx = error.transaction
+  }
+  return tx;
+}
+
+export const sendApproveSpenderTransaction = async (amount) => {
+  const spender = TESTCONTRACT_CONTRACT_ADDRESS;
   const contract = await getUSDTContract();
-  const symbol = await contract.symbol();
   const decimals = await contract.decimals();
   const sendAmount = ethers.utils.parseUnits(amount, decimals)
   let tx;
   try {
-    tx = await contract.transfer(to, sendAmount);
+    tx = await contract.approve(spender, sendAmount);
+    tx.wait();
   } catch(error){
     tx = error.transaction
   }
