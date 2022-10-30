@@ -7,23 +7,21 @@ async function main() {
   const contractOwner = await ethers.getSigners();
   console.log(`Deploying contract from: ${contractOwner[0].address}`);
 
-
+  // Deploy Tether
   const Tether = await ethers.getContractFactory('Tether');
 
-  // Deploy the contract
   console.log('Deploying Tether...');
   const tether = await Tether.deploy();
   await tether.deployed();
   console.log(`Tether deployed to: ${tether.address}`)
 
-  // Hardhat helper to get the ethers contractFactory object
-  const TestContract = await ethers.getContractFactory('TestContract');
+  // Deploy AoniCrowfunding
+  const AoniCrowfunding = await ethers.getContractFactory('AoniCrowfunding');
 
-  // Deploy the contract
-  console.log('Deploying TestContract...');
-  const testContract = await TestContract.deploy(tether.address);
-  await testContract.deployed();
-  console.log(`TestContract deployed to: ${testContract.address}`)
+  console.log('Deploying AoniCrowfunding...');
+  const aoniCrowfunding = await AoniCrowfunding.deploy(tether.address);
+  await aoniCrowfunding.deployed();
+  console.log(`AoniCrowfunding deployed to: ${aoniCrowfunding.address}`)
 }
 
 main()

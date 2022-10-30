@@ -11,6 +11,7 @@ export default function Profile(){
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
+    if (!session) return;
     const get_user_projects = async () => {
       try {
         const response = await getData('/api/get_user_projects', {

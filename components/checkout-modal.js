@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { getTokenSymbol, sendDepositTransaction, sendApproveSpenderTransaction } from "../utils/wallet-utils";
+import { getTokenSymbol, sendDepositTransaction, sendWithdrawTransaction, sendApproveSpenderTransaction } from "../utils/wallet-utils";
 import AccountContext from "../contexts/accountContext";
 
 export default function CheckoutModal(props) {
@@ -25,6 +25,17 @@ export default function CheckoutModal(props) {
     setTransactionInProgress(true)
     await sendApproveSpenderTransaction(transferAmount);
     const transaction = await sendDepositTransaction(transferAmount);
+    if (!!transaction.hash){
+      setShowTransactionConfirmation(true);
+      setTransactionHash(transaction.hash);
+    }
+    setTransactionInProgress(false)
+  }
+
+  const handleWithdrawOnClick = async () => {
+    setTransactionInProgress(true)
+    // await sendApproveSpenderTransaction(transferAmount);
+    const transaction = await sendWithdrawTransaction(transferAmount);
     if (!!transaction.hash){
       setShowTransactionConfirmation(true);
       setTransactionHash(transaction.hash);
@@ -70,7 +81,7 @@ export default function CheckoutModal(props) {
                       disabled={!enoughBalance}
                       onClick={handleTransferOnClick}>
                 { enoughBalance ? "TRANSFERIR" : "BALANCE INSUFICIENTE" }
-              </button> 
+              </button>
             </div>
           </div>
           <div className={showTransactionConfirmation ? "block" : "hidden"}>

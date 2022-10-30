@@ -29,7 +29,7 @@ export default function Explorar(){
       <CategoriesTab selectedTag={selectedTag} setSelectedTag={setSelectedTag}></CategoriesTab>
       <div className="grid grid-cols-3 mx-20 px-20 my-10 gap-y-20 place-items-center">
         {projects.map((project) => {
-          return (<ProjectCard project={project}/>)
+          return (<ProjectCard key={project} project={project}/>)
         })}
       </div>
     </>

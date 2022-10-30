@@ -1,11 +1,11 @@
 const { ethers } = require("ethers");
+
 const TETHER_CONTRACT_ABI = require("/artifacts/contracts/Tether.sol/Tether.json").abi;
 // const TETHER_CONTRACT_ADDRESS = '0xD19230e27095C33C4F722E7E420AFF190e5F2553'; // Goerli testnet contract
-const TETHER_CONTRACT_ADDRESS = '0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0'; // localhost contract
+const TETHER_CONTRACT_ADDRESS = '0x5FC8d32690cc91D4c39d9d3abcBD16989F875707'; // localhost contract
 
-const TESTCONTRACT_CONTRACT_ADDRESS = '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9'; // localhost contract
-const TESTCONTRACT_CONTRACT_ABI = require("/artifacts/contracts/TestContract.sol/TestContract.json").abi;
-
+const AONICROWFUNDING_CONTRACT_ADDRESS = '0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6'; // localhost contract
+const AONICROWFUNDING_CONTRACT_ABI = require("/artifacts/contracts/AoniCrowfunding.sol/AoniCrowfunding.json").abi;
 
 export const getContract = async (address, abi ) => {
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -17,8 +17,12 @@ export const getUSDTContract = async () => {
   return getContract(TETHER_CONTRACT_ADDRESS, TETHER_CONTRACT_ABI);
 }
 
-export const getDepositContract = async () => {
-  return getContract(TESTCONTRACT_CONTRACT_ADDRESS, TESTCONTRACT_CONTRACT_ABI);
+// export const getDepositContract = async () => {
+//   return getContract(TESTCONTRACT_CONTRACT_ADDRESS, TESTCONTRACT_CONTRACT_ABI);
+// }
+
+export const getAoniCrowfundingContract = async () => {
+  return getContract(AONICROWFUNDING_CONTRACT_ADDRESS, AONICROWFUNDING_CONTRACT_ABI);
 }
 
 export const authWallet = async () => {
@@ -59,22 +63,36 @@ export const getBalance = async () => {
   return ethers.utils.formatUnits(ownerBalance, balanceDecimals)
 }
 
-export const sendDepositTransaction = async (amount) => {
-  const depositContract = await getDepositContract();
-  const usdtContract = await getUSDTContract();
-  const decimals = await usdtContract.decimals();
-  const sendAmount = ethers.utils.parseUnits(amount, decimals);
-  let tx;
-  try {
-    tx = await depositContract.deposit(sendAmount);
-  } catch(error){
-    tx = error.transaction
-  }
-  return tx;
-}
+// export const sendDepositTransaction = async (amount) => {
+//   const depositContract = await getDepositContract();
+//   const usdtContract = await getUSDTContract();
+//   const decimals = await usdtContract.decimals();
+//   const sendAmount = ethers.utils.parseUnits(amount, decimals);
+//   let tx;
+//   try {
+//     tx = await depositContract.deposit(sendAmount);
+//   } catch(error){
+//     tx = error.transaction
+//   }
+//   return tx;
+// }
+
+// export const sendWithdrawTransaction = async (amount) => {
+//   const depositContract = await getDepositContract();
+//   const usdtContract = await getUSDTContract();
+//   const decimals = await usdtContract.decimals();
+//   const withdrawAmount = ethers.utils.parseUnits(amount, decimals);
+//   let tx;
+//   try {
+//     tx = await depositContract.withdraw(withdrawAmount);
+//   } catch(error){
+//     tx = error.transaction
+//   }
+//   return tx;
+// }
 
 export const sendApproveSpenderTransaction = async (amount) => {
-  const spender = TESTCONTRACT_CONTRACT_ADDRESS;
+  const spender = AONICROWFUNDING_CONTRACT_ADDRESS;
   const contract = await getUSDTContract();
   const decimals = await contract.decimals();
   const sendAmount = ethers.utils.parseUnits(amount, decimals)
@@ -86,6 +104,23 @@ export const sendApproveSpenderTransaction = async (amount) => {
     tx = error.transaction
   }
   return tx;
+}
+
+export const deployProjectContract = async (fundingGoal, deadline, ownerAddress) => {
+  const aoniCrowfundingContract = await getAoniCrowfundingContract();
+  const usdtContract = await getUSDTContract();
+  const decimals = await usdtContract.decimals();
+  const goalAmount = ethers.utils.parseUnits(fundingGoal, decimals);
+  let tx;
+  let projectAddress;
+  try {
+    tx = await aoniCrowfundingContract.createProject(goalAmount, deadline.getTime(), ownerAddress);
+    const transactionReceipt = await tx.wait();
+    projectAddress = transactionReceipt.events.find(event => event.event === 'ProjectCreated').args[0];
+  } catch(error){
+    tx = error.transaction
+  }
+  return projectAddress;
 }
 
 export const getTokenSymbol = async () => {

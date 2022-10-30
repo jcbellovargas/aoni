@@ -6,7 +6,7 @@ import { isImageFile, uploadImgToStorage } from "/utils/file-utils"
 import { postData } from "/utils/fetch-utils"
 import LoadingModal from '/components/loading-modal'
 import ErrorModal from '/components/error-modal'
-
+import { deployProjectContract } from "../utils/wallet-utils"
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,7 +19,7 @@ export default function NewProject(){
   const [projectDescription, setProjectDescription] = useState()
   const [projectTags, setProjectTags] = useState([])
   const [projectFundingGoal, setProjectFundingGoal] = useState({})
-  const [projectWallet, setProjectWallet] = useState()
+  const [projectOwnerAddress, setProjectOwnerAddress] = useState(session.user.walletAddress)
   const [projectDeadline, setProjectDeadline] = useState()
   const [errorMessage, setErrorMessage] = useState("")
   const fileInputRef = useRef(null);
@@ -57,17 +57,18 @@ export default function NewProject(){
     loadingModalRef.current.click();
     try {
       const projectImageUrl = await uploadImgToStorage(projectImage);
+      const projectAddress = await deployProjectContract(projectFundingGoal.amount, projectDeadline, projectOwnerAddress);
       const response = await postData('/api/create_project', { 
         name: projectName,
         description: projectDescription,
         fundingGoal: projectFundingGoal,
         tags: projectTags.map((t) => { return t.id }),
-        wallet: projectWallet,
+        ownerAddress: projectOwnerAddress,
+        contract: projectAddress,
         deadline: projectDeadline,
         image: projectImageUrl,
         user: session.user.id
-      })
-      console.log(response)
+      });
       if (response.error){
         showError(`Hubo un error al crear el proyecto: \n${error}`);
       } else {
@@ -86,7 +87,7 @@ export default function NewProject(){
   }
 
   const createButtonEnabled = () => {
-    return (projectName && projectDescription && projectFundingGoal && projectTags && projectWallet && projectDeadline && projectImage)
+    return (projectName && projectDescription && projectFundingGoal && projectTags && projectOwnerAddress && projectDeadline && projectImage)
   }
 
   return(
@@ -125,7 +126,7 @@ export default function NewProject(){
                   <label className="label">
                     <span className="label-text">Wallet address del proyecto</span>
                   </label>
-                  <input type="text" onChange={(e) => {setProjectWallet(e.target.value)}} defaultValue={session.user.walletAddress} placeholder="Wallet en la que se cobraran las recaudaciones" className="input input-bordered input-primary w-full"/>
+                  <input type="text" onChange={(e) => {setProjectOwnerAddress(e.target.value)}} defaultValue={session.user.walletAddress} placeholder="Wallet en la que se cobraran las recaudaciones" className="input input-bordered input-primary w-full"/>
                 </div>
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">

@@ -220,6 +220,81 @@
       "artifacts": [
         "TestContract"
       ]
+    },
+    "/home/jc/code/aoni/contracts/AoniProject.sol": {
+      "lastModificationDate": 1667082601164,
+      "contentHash": "5254a427dadcdbd4ab7074a1e21f12cd",
+      "sourceName": "contracts/AoniProject.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "AoniProject"
+      ]
+    },
+    "/home/jc/code/aoni/contracts/AoniCrowfunding.sol": {
+      "lastModificationDate": 1667170506951,
+      "contentHash": "5dc553c9d19cde3873f83d700cde0826",
+      "sourceName": "contracts/AoniCrowfunding.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "./AoniProject.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "AoniCrowfunding"
+      ]
     }
   }
 }

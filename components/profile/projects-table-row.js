@@ -22,7 +22,16 @@ export default function ProjectsTableRow(props) {
       <td>
         <div className="badge badge-accent text-lg">{props.project.status}</div>
       </td>
-      <td>{scrubAddress(props.user.walletAddress)}</td>
+      <td>
+        <a href={"https://goerli.etherscan.io/tx/"+props.project.ownerAddress} target="blank">
+          {scrubAddress(props.project.ownerAddress)}
+        </a>
+      </td>
+      <td>
+        <a href={"https://goerli.etherscan.io/tx/"+props.project.contract} target="blank">
+            {scrubAddress(props.project.contract)}
+        </a>
+      </td>
       <td>{props.project.donationsAmount}</td>
       <td>
         <div className="flex justify-between">
