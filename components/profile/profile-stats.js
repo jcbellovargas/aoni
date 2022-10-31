@@ -1,7 +1,7 @@
 export default function ProfileStats(props) {
 
   const totalFundingAmount = (projects) => {
-    return projects.reduce((sum, project) => sum + project.currentBalance.amount, 0)
+    return projects.reduce((sum, project) => sum + project.totalContributions.amount, 0)
   }
 
   const totalDonationsAmount = (projects) => {

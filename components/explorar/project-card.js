@@ -20,7 +20,7 @@ export default function ProjectCard(props) {
             </h2>
             <p className="h-20">{projectDesc(props.project.description)}</p>
             <div className="flex justify-between">
-              <span className="text-lg font-medium text-success dark:text-white">{`${props.project.currentBalance.amount} ${props.project.currentBalance.token}`}</span>
+              <span className="text-lg font-medium text-success dark:text-white">{`${props.project.totalContributions.amount} ${props.project.totalContributions.token}`}</span>
               <span className="text-lg font-medium text-success dark:text-white">{`${props.project.fundingGoalProgress}%`}</span>
             </div>
             <progress className="progress progress-success w-full" value={props.project.fundingGoalProgress} max="100"></progress>

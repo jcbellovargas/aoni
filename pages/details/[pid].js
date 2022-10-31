@@ -56,7 +56,7 @@ export default function Details(props) {
               <p className="py-6">{projectDetails.description}</p>
               <div className='flex flex-col'>
                 <div className="flex justify-between w-2/3">
-                  <span className="text-lg font-medium text-black dark:text-white">{`${projectDetails.currentBalance.amount} ${projectDetails.currentBalance.token}`}</span>
+                  <span className="text-lg font-medium text-black dark:text-white">{`${projectDetails.totalContributions.amount} ${projectDetails.totalContributions.token}`}</span>
                   <span className="text-lg font-small text-black dark:text-white">{`${projectDetails.fundingGoalProgress}% de ${projectDetails.fundingGoal.amount} ${projectDetails.fundingGoal.token}`}</span>
                 </div>
                 <progress className="progress progress-success w-2/3  float-left" value={projectDetails.fundingGoalProgress} max="100"></progress>

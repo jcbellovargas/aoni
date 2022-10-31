@@ -2,9 +2,9 @@ const { ethers } = require("ethers");
 
 const TETHER_CONTRACT_ABI = require("/artifacts/contracts/Tether.sol/Tether.json").abi;
 // const TETHER_CONTRACT_ADDRESS = '0xD19230e27095C33C4F722E7E420AFF190e5F2553'; // Goerli testnet contract
-const TETHER_CONTRACT_ADDRESS = '0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f'; // localhost contract
+const TETHER_CONTRACT_ADDRESS = '0x851356ae760d987E095750cCeb3bC6014560891C'; // localhost contract
 
-const AONICROWFUNDING_CONTRACT_ADDRESS = '0x4A679253410272dd5232B3Ff7cF5dbB88f295319'; // localhost contract
+const AONICROWFUNDING_CONTRACT_ADDRESS = '0xf5059a5D33d5853360D16C683c16e67980206f36'; // localhost contract
 const AONICROWFUNDING_CONTRACT_ABI = require("/artifacts/contracts/AoniCrowfunding.sol/AoniCrowfunding.json").abi;
 
 const AONIPROJECT_CONTRACT_ABI = require("/artifacts/contracts/AoniProject.sol/AoniProject.json").abi;
@@ -97,7 +97,6 @@ export const transferToProject = async (amount, contractAddress) => {
   const projectContract = await getContract(contractAddress, AONIPROJECT_CONTRACT_ABI);
   const usdtContract = await getUSDTContract();
   const decimals = await usdtContract.decimals();
-  debugger;
   const sendAmount = ethers.utils.parseUnits(amount, decimals);
   let tx;
   try {

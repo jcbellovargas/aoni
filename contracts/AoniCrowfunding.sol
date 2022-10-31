@@ -14,15 +14,10 @@ contract AoniCrowfunding {
     token = IERC20(_tokenAddress);
   }
 
-  function createProject(
-    uint fundingGoal,
-    uint deadline,
-    address projectOwner
-  ) external returns(address){
+  function createProject(uint fundingGoal, uint deadline, address projectOwner) external {
     AoniProject project = new AoniProject(fundingGoal, deadline, projectOwner, address(token));
     projects.push(project);
     emit ProjectCreated(address(project));
-    return address(project);
   }
 
   function getAllProjects() external view returns(AoniProject[] memory) {

@@ -35,7 +35,7 @@ export default function ProjectsTableRow(props) {
       <td>{props.project.donationsAmount}</td>
       <td>
         <div className="flex justify-between">
-          <span className="text-m font-medium text-success dark:text-white">{`${props.project.currentBalance.amount} ${props.project.currentBalance.token}`}</span>
+          <span className="text-m font-medium text-success dark:text-white">{`${props.project.totalContributions.amount} ${props.project.totalContributions.token}`}</span>
           <span className="text-m font-medium text-success dark:text-white">{`${props.project.fundingGoalProgress}%`}</span>
         </div>
         <progress className="progress progress-success w-full" value={props.project.fundingGoalProgress} max="100"></progress>

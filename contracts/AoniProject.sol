@@ -20,6 +20,7 @@ contract AoniProject {
   struct Details {
     uint fundingGoal;
     uint currentBalance;
+    uint totalContributions;
     uint deadline;
     address projectOwner;
     uint donationsAmount;
@@ -41,37 +42,36 @@ contract AoniProject {
     fundingToken = IERC20(_fundingTokenAddress);
   }
 
-  function getFundingGoal() public view returns(uint) {
+  function getFundingGoal() internal view returns(uint) {
     return fundingGoal;
   }
 
-  function getCurrentBalance() public view returns(uint) {
+  function getCurrentBalance() internal view returns(uint) {
     return fundingToken.balanceOf(address(this));
   }
 
-  function getDonationsAmount() public view returns(uint) {
+  function getDonationsAmount() internal view returns(uint) {
     return donationsAmount;
   }
 
-  function getDeadline() public view returns(uint) {
+  function getDeadline() internal view returns(uint) {
     return deadline;
   }
 
-  function getFundingToken() public view returns(address){
+  function getFundingToken() internal view returns(address){
     return address(fundingToken);
   }
 
-  function getStatus() public view returns(string memory) {
+  function getStatus() internal view returns(string memory) {
     if (status == Status.CANCELLED) return ("CANCELLED");
     if (status == Status.ACTIVE) return ("ACTIVE");
     if (status == Status.FINISHED) return ("FINISHED");
     return "";
   }
 
-  function getProjectOwner() public view returns(address) {
+  function getProjectOwner() internal view returns(address) {
     return projectOwner;
   }
-  
 
   function contribute(uint amount) external {
     require(status == Status.ACTIVE, "The project is no longer Active"); 
@@ -120,14 +120,23 @@ contract AoniProject {
     status = Status.CANCELLED;
   }
 
-  function getContributionsFrom(address from) view external returns(uint) {
+  function getContributionsFrom(address from) view internal returns(uint) {
     return contributions[from];
+  }
+
+  function getTotalContributions() view internal returns(uint) {
+    uint total = 0;
+    for (uint i; i < contributors.length; i++) {
+      total += contributions[contributors[i]];
+    }
+    return total;
   }
 
   function getDetails() view external returns(Details memory) {
     Details memory response = Details(
       getFundingGoal(),
       getCurrentBalance(),
+      getTotalContributions(),
       getDeadline(),
       getProjectOwner(),
       getDonationsAmount(),

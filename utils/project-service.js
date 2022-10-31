@@ -12,7 +12,12 @@ export const mockCurrentBalance = (project) => {
 }
 
 export const mockfundingGoalProgress = (project) => {
-  return parseInt((project.currentBalance.amount / project.fundingGoal.amount) * 100)
+  const progress = parseInt((project.currentBalance.amount / project.fundingGoal.amount) * 100)
+  if (progress >= 100){
+    return 100;
+  } else {
+    return progress;
+  }
 }
 
 export const mockRemainingDays = (project) => {
@@ -30,22 +35,28 @@ export const mockDonationsAmount = () => {
 
 export const decorateProjectData = (project, projectContractDetails) => {
   const projectTokenSymbol = project.fundingGoal.token;
-  project.currentBalance = parseContractBalance(projectContractDetails.currentBalance, projectTokenSymbol);
-  project.fundingGoalProgress = parseFundingGoalProgress(projectContractDetails.fundingGoal, project.currentBalance);
+  project.currentBalance = parseContractAmount(projectContractDetails.currentBalance, projectTokenSymbol);
+  project.totalContributions = parseContractAmount(projectContractDetails.totalContributions, projectTokenSymbol);
+  project.fundingGoalProgress = parseFundingGoalProgress(projectContractDetails.fundingGoal, project.totalContributions);
   project.remainingDays = parseRemainingDays(projectContractDetails.deadline);
   project.donationsAmount = parseDonationsAmount(projectContractDetails.donationsAmount);
+  project.status = projectContractDetails.status;
   return project;
 }
 
-const parseContractBalance = (contractBalance, tokenSymbol) => {
+const parseContractAmount = (contractBalance, tokenSymbol) => {
   const balanceAmount = parseInt(ethers.utils.formatEther(contractBalance));
   return { token: tokenSymbol, amount: balanceAmount };
 }
 
-const parseFundingGoalProgress = (contractFundingGoal, currentBalance) => {
+const parseFundingGoalProgress = (contractFundingGoal, totalContributions) => {
   const fundingGoalAmount = parseInt(ethers.utils.formatEther(contractFundingGoal));
-  const progress = (currentBalance.amount / fundingGoalAmount) * 100;
-  return parseInt(progress);
+  const progress = (totalContributions.amount / fundingGoalAmount) * 100;
+  if (progress >= 100){
+    return 100;
+  } else {
+    return parseFloat(progress.toFixed(1));
+  }
 }
 
 const parseRemainingDays = (contractDeadline) => {

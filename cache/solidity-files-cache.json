@@ -222,8 +222,8 @@
       ]
     },
     "/home/jc/code/aoni/contracts/AoniProject.sol": {
-      "lastModificationDate": 1667230252760,
-      "contentHash": "10aee3600b9af0a70b46f03df92c2649",
+      "lastModificationDate": 1667246132862,
+      "contentHash": "b4ff0b0a7a4d8ee0dab56f0755015483",
       "sourceName": "contracts/AoniProject.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -259,8 +259,8 @@
       ]
     },
     "/home/jc/code/aoni/contracts/AoniCrowfunding.sol": {
-      "lastModificationDate": 1667226295494,
-      "contentHash": "13257a1238fb80a684ce7493313f7dab",
+      "lastModificationDate": 1667240386093,
+      "contentHash": "1c6dcf2fbe037f159363e5e593480205",
       "sourceName": "contracts/AoniCrowfunding.sol",
       "solcConfig": {
         "version": "0.8.17",
