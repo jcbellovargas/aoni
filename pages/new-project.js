@@ -19,7 +19,7 @@ export default function NewProject(){
   const [projectDescription, setProjectDescription] = useState()
   const [projectTags, setProjectTags] = useState([])
   const [projectFundingGoal, setProjectFundingGoal] = useState({})
-  const [projectOwnerAddress, setProjectOwnerAddress] = useState(session.user.walletAddress)
+  const [projectOwnerAddress, setProjectOwnerAddress] = useState(session.user.walletAddress || "")
   const [projectDeadline, setProjectDeadline] = useState()
   const [errorMessage, setErrorMessage] = useState("")
   const fileInputRef = useRef(null);

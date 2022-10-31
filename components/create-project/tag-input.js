@@ -20,7 +20,7 @@ export default function TagInput(props){
       handleDelete={handleDelete}
       handleAddition={handleAddition}
       minQueryLength={1}
-      placeholder={props.suggestions.map((s) => { return s.text })}
+      placeholder={props.suggestions.map((s) => { return s.text }).toString()}
       allowDeleteFromEmptyInput={false}
       inputFieldPosition="bottom"
       classNames={{
