@@ -184,43 +184,6 @@
         "Tether"
       ]
     },
-    "/home/jc/code/aoni/contracts/TestContract.sol": {
-      "lastModificationDate": 1666970291198,
-      "contentHash": "0aa7bc0d5ab2c6f343e8eeff2f9c0b4d",
-      "sourceName": "contracts/TestContract.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.17"
-      ],
-      "artifacts": [
-        "TestContract"
-      ]
-    },
     "/home/jc/code/aoni/contracts/AoniProject.sol": {
       "lastModificationDate": 1667246132862,
       "contentHash": "b4ff0b0a7a4d8ee0dab56f0755015483",
