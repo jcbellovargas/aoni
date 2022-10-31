@@ -5,6 +5,8 @@ import CheckoutModal from '../../components/checkout-modal'
 import AccountContext from '../../contexts/accountContext';
 import WalletModal from '../../components/wallet-modal';
 import { getData } from "/utils/fetch-utils"
+import { getProjectContractDetails } from '../../utils/wallet-utils';
+import { getProject } from '../../utils/project-service';
 
 export default function Details(props) {
   const router = useRouter();
@@ -22,11 +24,8 @@ export default function Details(props) {
     if(!pid) return;
     const fetchProjectDetails = async (id) => {
       try {
-        const response = await getData('/api/get_project', { id: id })
-        if (response.error){
-          console.log(error);
-        }
-        setProjectDetails(response.project)
+        const project = await getProject(id);
+        setProjectDetails(project)
         setLoading(false);
       } catch(error) {
         console.log(error);

@@ -1,5 +1,6 @@
 import { db } from "../../firebase"
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { mockCurrentBalance, mockfundingGoalProgress, mockRemainingDays, mockDonationsAmount } from "/utils/project-service";
 
 export default async function handler(req, res) {
   try {
@@ -33,32 +34,5 @@ const fetchDatabaseProjects = async (user) => {
   });
 
   return projects
-}
-
-/////////////////// MOCK FUNCTIONS
-const randomNumber = (min, max) => {
-  return Math.random() * (max - min) + min;
-}
-
-const mockCurrentBalance = (project) => {
-  const amount = parseInt(project.fundingGoal.amount * randomNumber(0.1, 0.9))
-  return { token: "USDT", amount: amount }
-}
-
-const mockfundingGoalProgress = (project) => {
-  return parseInt((project.currentBalance.amount / project.fundingGoal.amount) * 100)
-}
-
-const mockRemainingDays = (project) => {
-  const now = new Date()
-  const deadline = new Date(project.deadline)
-  const timeRemaining = deadline.getTime() - now.getTime();
-  const daysRemaining = timeRemaining / (1000 * 3600 * 24);
-  return parseInt(daysRemaining)
-
-}
-
-const mockDonationsAmount = () => {
-  return parseInt(randomNumber(5,38))
 }
 

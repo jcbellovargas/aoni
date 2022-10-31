@@ -17,6 +17,16 @@ contract AoniProject {
   address[] contributors;
   IERC20 fundingToken;
 
+  struct Details {
+    uint fundingGoal;
+    uint currentBalance;
+    uint deadline;
+    address projectOwner;
+    uint donationsAmount;
+    string status;
+    address fundingToken;
+  }
+
   constructor(
     uint _fundingGoal,
     uint _deadline,
@@ -39,7 +49,7 @@ contract AoniProject {
     return fundingToken.balanceOf(address(this));
   }
 
-  function getDonationsAmount() external view returns(uint) {
+  function getDonationsAmount() public view returns(uint) {
     return donationsAmount;
   }
 
@@ -47,16 +57,21 @@ contract AoniProject {
     return deadline;
   }
 
-  function getStatus() external view returns(string memory) {
+  function getFundingToken() public view returns(address){
+    return address(fundingToken);
+  }
+
+  function getStatus() public view returns(string memory) {
     if (status == Status.CANCELLED) return ("CANCELLED");
     if (status == Status.ACTIVE) return ("ACTIVE");
     if (status == Status.FINISHED) return ("FINISHED");
     return "";
   }
 
-  function getProjectOwner() external view returns(address) {
+  function getProjectOwner() public view returns(address) {
     return projectOwner;
   }
+  
 
   function contribute(uint amount) external {
     require(status == Status.ACTIVE, "The project is no longer Active"); 
@@ -107,6 +122,19 @@ contract AoniProject {
 
   function getContributionsFrom(address from) view external returns(uint) {
     return contributions[from];
+  }
+
+  function getDetails() view external returns(Details memory) {
+    Details memory response = Details(
+      getFundingGoal(),
+      getCurrentBalance(),
+      getDeadline(),
+      getProjectOwner(),
+      getDonationsAmount(),
+      getStatus(),
+      getFundingToken()
+    );
+    return response;
   }
 
 }

@@ -5,10 +5,10 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./AoniProject.sol";
 
 contract AoniCrowfunding {
-   IERC20 private token;
-   AoniProject[] projects;
+  IERC20 private token;
+  AoniProject[] projects;
 
-   event ProjectCreated(address);
+  event ProjectCreated(address);
 
   constructor(address _tokenAddress) {
     token = IERC20(_tokenAddress);
