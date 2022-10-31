@@ -5,7 +5,7 @@ import ProfileStats from "../components/profile/profile-stats"
 import ProjectsTable from "../components/profile/projects-table"
 import { getData } from "/utils/fetch-utils"
 import { getProjectContractDetails } from '/utils/wallet-utils';
-import { decorateProjectData } from '/utils/project-service';
+import { getProjectsByUser } from '../utils/project-service';
 
 
 export default function Profile(){
@@ -16,13 +16,7 @@ export default function Profile(){
     if (!session) return;
     const get_user_projects = async () => {
       try {
-        const response = await getData('/api/get_user_projects', {
-          user: session.user.id
-        })
-        for (const project of response.projects) {
-          const contractDetails = await getProjectContractDetails(project.contract);
-          decorateProjectData(project, contractDetails);
-        };
+        const response = await getProjectsByUser(session.user.id);
         setProjects(response.projects)
       } catch(error) {
         console.log(error);

@@ -1,7 +1,6 @@
 const { ethers } = require("ethers");
 import { getData } from "/utils/fetch-utils"
 import { getProjectContractDetails } from '/utils/wallet-utils';
-// import { decorateProjectData } from '/utils/project-service';
 
 export const randomNumber = (min, max) => {
   return Math.random() * (max - min) + min;
@@ -65,4 +64,26 @@ export const getProject = async (id) => {
   const contractDetails = await getProjectContractDetails(response.project.contract);
   const project = decorateProjectData(response.project, contractDetails);
   return project;
+}
+
+export const getProjectsByUser = async (userId) => {
+  const response = await getData('/api/get_user_projects', {
+    user: userId
+  })
+  for (const project of response.projects) {
+    const contractDetails = await getProjectContractDetails(project.contract);
+    decorateProjectData(project, contractDetails);
+  };
+  return response;
+}
+
+export const getProjectsByTag = async (tag) => {
+  const response = await getData('/api/get_tag_projects', {
+    tag: tag
+  })
+  for (const project of response.projects) {
+    const contractDetails = await getProjectContractDetails(project.contract);
+    decorateProjectData(project, contractDetails);
+  };
+  return response;
 }

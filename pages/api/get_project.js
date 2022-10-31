@@ -1,19 +1,11 @@
 import { db } from "../../firebase"
-import { collection, query, where, getDoc, doc } from "firebase/firestore";
-import { mockCurrentBalance, mockfundingGoalProgress, mockRemainingDays, mockDonationsAmount } from "/utils/project-service";
-
+import { getDoc, doc } from "firebase/firestore";
 
 export default async function handler(req, res) {
   try {
     const req_payload = req.query
 
     let project = await fetchDatabaseProject(req_payload.id)
-    
-
-    project.currentBalance = mockCurrentBalance(project)
-    project.fundingGoalProgress = mockfundingGoalProgress(project)
-    project.remainingDays = mockRemainingDays(project)
-    project.donationsAmount = mockDonationsAmount()
 
     res.status(200).json({ project })
   } catch (error){

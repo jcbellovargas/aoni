@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CategoriesTab from "../components/explorar/categories-tab";
 import ProjectCard from "../components/explorar/project-card";
-import { getData } from "/utils/fetch-utils"
+import { getProjectsByTag } from "../utils/project-service";
 
 export default function Explorar(){
   const [selectedTag, setSelectedTag] = useState("Negocios");
@@ -10,12 +10,7 @@ export default function Explorar(){
   useEffect(() => {
     const get_projects_by_tag = async () => {
       try {
-        const response = await getData('/api/get_tag_projects', {
-          tag: selectedTag
-        })
-        if (response.error){
-          console.log(error);
-        }
+        const response = await getProjectsByTag(selectedTag);
         setProjects(response.projects)
       } catch(error) {
         console.log(error);
