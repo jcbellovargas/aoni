@@ -2,37 +2,6 @@ const { ethers } = require("ethers");
 import { getData } from "/utils/fetch-utils"
 import { getProjectContractDetails } from '/utils/wallet-utils';
 
-export const randomNumber = (min, max) => {
-  return Math.random() * (max - min) + min;
-}
-
-export const mockCurrentBalance = (project) => {
-  const amount = parseInt(project.fundingGoal.amount * randomNumber(0.1, 0.9))
-  return { token: "USDT", amount: amount }
-}
-
-export const mockfundingGoalProgress = (project) => {
-  const progress = parseInt((project.currentBalance.amount / project.fundingGoal.amount) * 100)
-  if (progress >= 100){
-    return 100;
-  } else {
-    return progress;
-  }
-}
-
-export const mockRemainingDays = (project) => {
-  const now = new Date()
-  const deadline = new Date(project.deadline)
-  const timeRemaining = deadline.getTime() - now.getTime();
-  const daysRemaining = timeRemaining / (1000 * 3600 * 24);
-  return parseInt(daysRemaining)
-
-}
-
-export const mockDonationsAmount = () => {
-  return parseInt(randomNumber(5,38))
-}
-
 export const decorateProjectData = (project, projectContractDetails) => {
   const projectTokenSymbol = project.fundingGoal.token;
   project.currentBalance = parseContractAmount(projectContractDetails.currentBalance, projectTokenSymbol);

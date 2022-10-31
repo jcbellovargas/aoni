@@ -118,7 +118,6 @@ export const getProjectContractDetails = async (projectAddress) => {
   return response;
 }
 
-
 export const getTokenSymbol = async () => {
   const contract = await getUSDTContract();
   const symbol = await contract.symbol();
