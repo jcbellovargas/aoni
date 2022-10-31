@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { getTokenSymbol, sendDepositTransaction, sendWithdrawTransaction, sendApproveSpenderTransaction } from "../utils/wallet-utils";
+import { getTokenSymbol, transferToProject, sendWithdrawTransaction, sendApproveSpenderTransaction } from "../utils/wallet-utils";
 import AccountContext from "../contexts/accountContext";
 
 export default function CheckoutModal(props) {
@@ -23,8 +23,8 @@ export default function CheckoutModal(props) {
 
   const handleTransferOnClick = async () => {
     setTransactionInProgress(true)
-    await sendApproveSpenderTransaction(transferAmount);
-    const transaction = await sendDepositTransaction(transferAmount);
+    await sendApproveSpenderTransaction(transferAmount, props.projectContract);
+    const transaction = await transferToProject(transferAmount, props.projectContract);
     if (!!transaction.hash){
       setShowTransactionConfirmation(true);
       setTransactionHash(transaction.hash);

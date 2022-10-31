@@ -65,7 +65,7 @@ export default function Details(props) {
                 {address && (
                   <>
                     <label ref={checkoutModalRef} htmlFor="checkout-modal" className="h-0 w-0 invisible"/>
-                    <CheckoutModal currentAccountBalance={currentAccountBalance}/>
+                    <CheckoutModal currentAccountBalance={currentAccountBalance} projectContract={projectDetails.contract}/>
                   </>
                 )}
                 <label ref={walletModalRef} htmlFor="connect-wallet" className="h-0 w-0 invisible"/>
