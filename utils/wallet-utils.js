@@ -2,14 +2,14 @@ const { ethers } = require("ethers");
 
 const TETHER_CONTRACT_ABI = require("/artifacts/contracts/Tether.sol/Tether.json").abi;
 // const TETHER_CONTRACT_ADDRESS = '0xD19230e27095C33C4F722E7E420AFF190e5F2553'; // Goerli testnet contract
-const TETHER_CONTRACT_ADDRESS = '0x851356ae760d987E095750cCeb3bC6014560891C'; // localhost contract
+const TETHER_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_TETHER_CONTRACT_ADDRESS; // localhost contract
 
-const AONICROWFUNDING_CONTRACT_ADDRESS = '0xf5059a5D33d5853360D16C683c16e67980206f36'; // localhost contract
+const AONICROWFUNDING_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_AONICROWFUNDING_CONTRACT_ADDRESS; // localhost contract
 const AONICROWFUNDING_CONTRACT_ABI = require("/artifacts/contracts/AoniCrowfunding.sol/AoniCrowfunding.json").abi;
 
 const AONIPROJECT_CONTRACT_ABI = require("/artifacts/contracts/AoniProject.sol/AoniProject.json").abi;
 
-export const getContract = async (address, abi ) => {
+export const getContract = async (address, abi) => {
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
   const contract = new ethers.Contract(address, abi, provider.getSigner());
   return contract
@@ -70,7 +70,7 @@ export const sendApproveSpenderTransaction = async (amount, contractAddress) => 
   try {
     tx = await contract.approve(spender, sendAmount);
     tx.wait();
-  } catch(error){
+  } catch (error) {
     tx = error.transaction
   }
   return tx;
@@ -87,7 +87,7 @@ export const deployProjectContract = async (fundingGoal, deadline, ownerAddress)
     tx = await aoniCrowfundingContract.createProject(goalAmount, deadline.getTime(), ownerAddress);
     const transactionReceipt = await tx.wait();
     projectAddress = transactionReceipt.events.find(event => event.event === 'ProjectCreated').args[0];
-  } catch(error){
+  } catch (error) {
     tx = error.transaction
   }
   return projectAddress;
@@ -101,7 +101,7 @@ export const transferToProject = async (amount, contractAddress) => {
   let tx;
   try {
     tx = await projectContract.contribute(sendAmount);
-  } catch(error){
+  } catch (error) {
     tx = error.transaction
   }
   return tx;
@@ -112,7 +112,7 @@ export const getProjectContractDetails = async (projectAddress) => {
   let response;
   try {
     response = await projectContract.getDetails();
-  } catch(error){
+  } catch (error) {
     response = error.transaction
   }
   return response;
