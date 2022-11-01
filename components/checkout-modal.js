@@ -32,17 +32,6 @@ export default function CheckoutModal(props) {
     setTransactionInProgress(false)
   }
 
-  const handleWithdrawOnClick = async () => {
-    setTransactionInProgress(true)
-    // await sendApproveSpenderTransaction(transferAmount);
-    const transaction = await sendWithdrawTransaction(transferAmount);
-    if (!!transaction.hash){
-      setShowTransactionConfirmation(true);
-      setTransactionHash(transaction.hash);
-    }
-    setTransactionInProgress(false)
-  }
-
   useEffect(() => { 
     const fetchTokenSymbol = async () => {
       const symbol = await getTokenSymbol();
