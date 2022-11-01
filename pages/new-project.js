@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useRouter } from 'next/router'
 import TagInput from "../components/create-project/tag-input"
 import { isImageFile, uploadImgToStorage } from "/utils/file-utils"
@@ -19,7 +19,7 @@ export default function NewProject(){
   const [projectDescription, setProjectDescription] = useState()
   const [projectTags, setProjectTags] = useState([])
   const [projectFundingGoal, setProjectFundingGoal] = useState({})
-  const [projectOwnerAddress, setProjectOwnerAddress] = useState(session.user.walletAddress || "")
+  const [projectOwnerAddress, setProjectOwnerAddress] = useState("")
   const [projectDeadline, setProjectDeadline] = useState()
   const [errorMessage, setErrorMessage] = useState("")
   const fileInputRef = useRef(null);
@@ -52,6 +52,11 @@ export default function NewProject(){
   const handleImageInputClick = () => {
     fileInputRef.current.click()
   }
+
+  useEffect(() => {
+    if(!session) return;
+    setProjectOwnerAddress(session.user.walletAddress);
+  },[session])
 
   const createProject = async () => {
     loadingModalRef.current.click();
@@ -126,7 +131,7 @@ export default function NewProject(){
                   <label className="label">
                     <span className="label-text">Wallet address del proyecto</span>
                   </label>
-                  <input type="text" onChange={(e) => {setProjectOwnerAddress(e.target.value)}} defaultValue={session.user.walletAddress} placeholder="Wallet en la que se cobraran las recaudaciones" className="input input-bordered input-primary w-full"/>
+                  <input type="text" onChange={(e) => {setProjectOwnerAddress(e.target.value)}} defaultValue={projectOwnerAddress} placeholder="Wallet en la que se cobraran las recaudaciones" className="input input-bordered input-primary w-full"/>
                 </div>
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">

@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { getTokenSymbol, transferToProject, sendWithdrawTransaction, sendApproveSpenderTransaction } from "../utils/wallet-utils";
+import { getTokenSymbol, transferToProject, sendApproveSpenderTransaction } from "../utils/wallet-utils";
 import AccountContext from "../contexts/accountContext";
 
 export default function CheckoutModal(props) {
