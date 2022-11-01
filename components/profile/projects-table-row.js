@@ -23,12 +23,12 @@ export default function ProjectsTableRow(props) {
         <div className="badge badge-accent text-lg">{props.project.status}</div>
       </td>
       <td>
-        <a href={"https://goerli.etherscan.io/tx/"+props.project.ownerAddress} target="blank">
+        <a href={"https://goerli.etherscan.io/address/"+props.project.ownerAddress} target="blank">
           {scrubAddress(props.project.ownerAddress)}
         </a>
       </td>
       <td>
-        <a href={"https://goerli.etherscan.io/tx/"+props.project.contract} target="blank">
+        <a href={"https://goerli.etherscan.io/address/"+props.project.contract} target="blank">
             {scrubAddress(props.project.contract)}
         </a>
       </td>
