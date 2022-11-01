@@ -69,7 +69,7 @@ export const sendApproveSpenderTransaction = async (amount, contractAddress) => 
   let tx;
   try {
     tx = await contract.approve(spender, sendAmount);
-    tx.wait();
+    const rc = await tx.wait();
   } catch (error) {
     tx = error.transaction
   }
