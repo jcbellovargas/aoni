@@ -52,7 +52,7 @@ export default function Details(props) {
             <img src={projectDetails.image} className="ml-20 rounded-lg shadow-2xl w-[640px] h-[480px]" />
             <div className="w-[600px]">
               <h1 className="text-5xl font-bold">{projectDetails.name}</h1>
-              <h1 className='text-xl'>de Creador projecto</h1>
+              <h1 className='text-xl'>de {projectDetails.userName}</h1>
               <p className="py-6">{projectDetails.description}</p>
               <div className='flex flex-col'>
                 <div className="flex justify-between w-2/3">

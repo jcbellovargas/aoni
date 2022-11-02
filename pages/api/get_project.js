@@ -21,7 +21,9 @@ const fetchDatabaseProject = async (id) => {
   let project = {};
   if (projectSnap.exists()) {
     console.log("Document data:", projectSnap.data());
-    project = {id: projectSnap.id, ...projectSnap.data()}
+    const usersRef = await doc(db, "users", projectSnap.data().user);
+    const userSnap = await getDoc(usersRef);
+    project = {id: projectSnap.id, ...projectSnap.data(), userName: userSnap.data().name}
   } else {
     // doc.data() will be undefined in this case
     console.log("No such document!");
