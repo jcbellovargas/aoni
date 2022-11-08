@@ -42,12 +42,12 @@ export default function ProjectsTableRow(props) {
         <br/>
       </td>
       <td>{`${props.project.remainingDays} dias`}</td>
-      <th>
+      <th className="px-0">
         <Link href={`/details/${props.project.id}`}>
           <button className="btn btn-active btn-secondary btn-sm cursor-pointer">Detalles</button>
         </Link>
       </th>
-      <th>
+      <th className="px-0">
         <Link href={`/edit/${props.project.id}`}>
           <button className="btn btn-active btn-secondary btn-sm cursor-pointer">Editar</button>
         </Link>
