@@ -3,7 +3,7 @@ import { ref, uploadBytes, getDownloadURL} from "firebase/storage"
 import { v4 } from 'uuid'
 
 export const isImageFile = (file) => {
-  return file && file['type'].split('/')[0] === 'image';
+  return file && file['type'] && file['type'].split('/')[0] === 'image';
 }
 
 export const uploadImgToStorage = async (image) => {
