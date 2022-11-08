@@ -43,9 +43,14 @@ export default function ProjectsTableRow(props) {
       </td>
       <td>{`${props.project.remainingDays} dias`}</td>
       <th>
-      <Link href={`/details/${props.project.id}`}>
-        <button className="btn btn-active btn-secondary btn-sm cursor-pointer">Detalles</button>
-      </Link>
+        <Link href={`/details/${props.project.id}`}>
+          <button className="btn btn-active btn-secondary btn-sm cursor-pointer">Detalles</button>
+        </Link>
+      </th>
+      <th>
+        <Link href={`/edit/${props.project.id}`}>
+          <button className="btn btn-active btn-secondary btn-sm cursor-pointer">Editar</button>
+        </Link>
       </th>
     </tr>
   )

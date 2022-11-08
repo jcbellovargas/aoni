@@ -15,6 +15,7 @@ export default function ProjectsTable(props) {
             <th>Recaudacion</th>
             <th>Tiempo Restante</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
