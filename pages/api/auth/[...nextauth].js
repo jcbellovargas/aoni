@@ -26,7 +26,7 @@ export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   adapter: FirestoreAdapter(firebaseConfig),
   pages: {
-    error: "/login",
+    error: "/profile",
     signIn: '/login'
   },
   callbacks: {
