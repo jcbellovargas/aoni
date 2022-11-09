@@ -3,6 +3,7 @@ import { SessionProvider } from "next-auth/react"
 import Layout from '../components/layout'
 import AccountContext from '/contexts/accountContext'
 import { useState } from 'react'
+import MetamaskModal from '../components/metamask-modal'
 
 export default function MyApp({ 
   Component,
@@ -16,9 +17,10 @@ export default function MyApp({
       <SessionProvider session={session}>
         <Layout>
           <Component {...pageProps} />
+          <MetamaskModal/>
         </Layout>
       </SessionProvider>
     </AccountContext.Provider>
-    
+
   )
 }
