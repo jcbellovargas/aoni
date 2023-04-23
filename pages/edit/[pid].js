@@ -85,13 +85,13 @@ export default function NewProject(){
       });
       debugger;
       if (response.error){
-        showError(`Hubo un error al actualizar el proyecto: \n${error}`);
+        showError(`We found an error trying to update the project: \n${error}`);
       } else {
         router.push("/profile")
       }
     } catch(error) {
       console.log(error);
-      showError(`Hubo un error al actualizar el proyecto: \n${error}`);
+      showError(`We found an error trying to update the project: \n${error}`);
     }
     loadingModalRef.current.click();
   }
@@ -115,32 +115,32 @@ export default function NewProject(){
               <div className="card-body">
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">
-                    <span className="label-text">Nombre del proyecto</span>
+                    <span className="label-text">Project Name</span>
                   </label>
-                  <input type="text" defaultValue={projectName} placeholder="Nombre" className="input input-bordered input-primary w-full" onChange={(e) => {setProjectName(e.target.value)}} />
+                  <input type="text" defaultValue={projectName} placeholder="Name" className="input input-bordered input-primary w-full" onChange={(e) => {setProjectName(e.target.value)}} />
                 </div>
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">
-                    <span className="label-text">Descripcion</span>
+                    <span className="label-text">Description</span>
                   </label>
-                  <textarea defaultValue={projectDescription} className="textarea textarea-primary" onChange={(e) => setProjectDescription(e.target.value)} placeholder="Detalles del proposito del proyecto y sus caracteristicas"></textarea>
+                  <textarea defaultValue={projectDescription} className="textarea textarea-primary" onChange={(e) => setProjectDescription(e.target.value)} placeholder="Details about the project and its goals"></textarea>
                 </div>
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">
-                    <span className="label-text">Tipo de proyecto</span>
+                    <span className="label-text">Project Type</span>
                   </label>
                   <TagInput suggestions={tagOptions} tags={projectTags} setTags={setProjectTags}/>
                 </div>
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">
-                    <span className="label-text">Imagen del proyecto</span>
+                    <span className="label-text">Project Image</span>
                   </label>
                   <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileChange}/>
-                  <input type="text" value={projectImage.name} placeholder="Tamaño recomendado de 640x480" className="input input-bordered input-primary w-full cursor-pointer" onClick={handleImageInputClick}/>
+                  <input type="text" value={projectImage.name} placeholder="Recommended size 640x480" className="input input-bordered input-primary w-full cursor-pointer" onClick={handleImageInputClick}/>
                 </div>
 
                 <div className="card-actions justify-end">
-                  <button onClick={updateProject} className="btn btn-primary mt-10" disabled={!updateButtonEnabled()}>Actualizar Proyecto</button>
+                  <button onClick={updateProject} className="btn btn-primary mt-10" disabled={!updateButtonEnabled()}>Update Project</button>
                 </div>
               </div>
             </div>
@@ -149,7 +149,7 @@ export default function NewProject(){
         )}
       </div>
 
-      <LoadingModal msg={"Creando proyecto"} openRef={loadingModalRef}/>
+      <LoadingModal msg={"Creating Project"} openRef={loadingModalRef}/>
       <ErrorModal msg={errorMessage} openRef={errorModalRef}/>
     </>
   )

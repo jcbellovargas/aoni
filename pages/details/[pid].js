@@ -61,7 +61,7 @@ export default function Details(props) {
                 </div>
                 <progress className="progress progress-success w-2/3  float-left" value={projectDetails.fundingGoalProgress} max="100"></progress>
                 <span className="text-lg font-small text-black dark:text-white">{`Quedan ${projectDetails.remainingDays} dias`}</span>
-                <button onClick={handleCheckoutButtonClick} className="btn btn-secondary rounded-full w-2/3 mt-6">Participar</button>
+                <button onClick={handleCheckoutButtonClick} className="btn btn-secondary rounded-full w-2/3 mt-6">Donate</button>
                 {address && (
                   <>
                     <label ref={checkoutModalRef} htmlFor="checkout-modal" className="h-0 w-0 invisible"/>
