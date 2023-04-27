@@ -30,11 +30,11 @@ export default function Navbar(){
       </div>
       <div className="flex-none">
         <Link href="/explorar">
-          <a className="btn btn-primary rounded-full normal-case text-l text-white">explorar</a>
+          <a className="btn btn-primary rounded-full normal-case text-l text-white">explore</a>
         </Link>
       </div>
       <div className="flex-none">
-        <label htmlFor="connect-wallet" className="btn btn-primary rounded-full normal-case text-l text-white">{!!address ? address : "conectar wallet"}</label>
+        <label htmlFor="connect-wallet" className="btn btn-primary rounded-full normal-case text-l text-white">{!!address ? address : "connect wallet"}</label>
         <WalletModal isWalletConnected={isWalletConnected} selectedAddress={address}/>
       </div>
       <div className="flex-none gap-2">
@@ -60,12 +60,12 @@ export default function Navbar(){
           {session && (
             <ul tabIndex="0" className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
               <Link href="/profile">
-                <li><a>Ver Perfil</a></li>
+                <li><a>View Profile</a></li>
               </Link>
               <Link href="/new-project">
-                <li><a>Crear Proyecto</a></li>
+                <li><a>Create Project</a></li>
               </Link>
-              <li><a onClick={() => signOut()}>Cerrar Sesion</a></li>
+              <li><a onClick={() => signOut()}>Log Out</a></li>
             </ul>
           )}
         </div>
