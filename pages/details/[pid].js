@@ -4,8 +4,6 @@ import { getBalance } from "/utils/wallet-utils";
 import CheckoutModal from '../../components/checkout-modal'
 import AccountContext from '../../contexts/accountContext';
 import WalletModal from '../../components/wallet-modal';
-import { getData } from "/utils/fetch-utils"
-import { getProjectContractDetails } from '../../utils/wallet-utils';
 import { getProject } from '../../utils/project-service';
 
 export default function Details(props) {
@@ -57,10 +55,10 @@ export default function Details(props) {
               <div className='flex flex-col'>
                 <div className="flex justify-between w-2/3">
                   <span className="text-lg font-medium text-black dark:text-white">{`${projectDetails.totalContributions.amount} ${projectDetails.totalContributions.token}`}</span>
-                  <span className="text-lg font-small text-black dark:text-white">{`${projectDetails.fundingGoalProgress}% de ${projectDetails.fundingGoal.amount} ${projectDetails.fundingGoal.token}`}</span>
+                  <span className="text-lg font-small text-black dark:text-white">{`${projectDetails.fundingGoalProgress}% of ${projectDetails.fundingGoal.amount} ${projectDetails.fundingGoal.token}`}</span>
                 </div>
                 <progress className="progress progress-success w-2/3  float-left" value={projectDetails.fundingGoalProgress} max="100"></progress>
-                <span className="text-lg font-small text-black dark:text-white">{`Quedan ${projectDetails.remainingDays} dias`}</span>
+                <span className="text-lg font-small text-black dark:text-white">{`${projectDetails.remainingDays} days left`}</span>
                 <button onClick={handleCheckoutButtonClick} className="btn btn-secondary rounded-full w-2/3 mt-6">Donate</button>
                 {address && (
                   <>

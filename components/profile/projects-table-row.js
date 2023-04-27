@@ -41,15 +41,15 @@ export default function ProjectsTableRow(props) {
         <progress className="progress progress-success w-full" value={props.project.fundingGoalProgress} max="100"></progress>
         <br/>
       </td>
-      <td>{`${props.project.remainingDays} dias`}</td>
+      <td>{`${props.project.remainingDays} days`}</td>
       <th className="px-0">
         <Link href={`/details/${props.project.id}`}>
-          <button className="btn btn-active btn-secondary btn-sm cursor-pointer">Detalles</button>
+          <button className="btn btn-active btn-secondary btn-sm cursor-pointer">Details</button>
         </Link>
       </th>
       <th className="px-0">
         <Link href={`/edit/${props.project.id}`}>
-          <button className="btn btn-active btn-secondary btn-sm cursor-pointer">Editar</button>
+          <button className="btn btn-active btn-secondary btn-sm cursor-pointer">Edit</button>
         </Link>
       </th>
     </tr>

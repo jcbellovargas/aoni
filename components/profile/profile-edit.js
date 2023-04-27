@@ -50,22 +50,22 @@ export default function ProfileEdit(props){
     <div className="card mt-8 bg-base-100 shadow-xl">
       <input className="hidden" ref={inputRef} type="file" onChange={handleFileChange}/>
       <div className="card-body">
-        <h2 className="card-title">Editar Perfil</h2>
+        <h2 className="card-title">Edit Profile</h2>
         <img className="mask mask-squircle w-20 cursor-pointer" src={profileImg} onClick={handleImageClick} />
         <div className="form-control w-full max-w-2xl">
           <label className="label">
-            <span className="label-text">Nombre de usuario</span>
+            <span className="label-text">Username</span>
           </label>
-          <input type="text" defaultValue={userName} placeholder="Nombre" className="input input-bordered w-full" onChange={(e) => setUserName(e.target.value)} />
+          <input type="text" defaultValue={userName} placeholder="Name" className="input input-bordered w-full" onChange={(e) => setUserName(e.target.value)} />
         </div>
         <div className="form-control w-full max-w-2xl">
           <label className="label">
-            <span className="label-text">Wallet por default para todos los proyectos</span>
+            <span className="label-text">Default wallet for all projects</span>
           </label>
           <input type="text" defaultValue={userWalletAddress} placeholder="Wallet Address" className="input input-bordered w-full" onChange={(e) => setUserWalletAddress(e.target.value)}/>
         </div>
         <div className="card-actions justify-end">
-          <button onClick={saveProfile} className="btn btn-primary" disabled={disableSave()}>Guardar</button>
+          <button onClick={saveProfile} className="btn btn-primary" disabled={disableSave()}>Save</button>
         </div>
       </div>
     </div>

@@ -7,13 +7,13 @@ export default function ProjectsTable(props) {
       <table className="table w-full">
         <thead>
           <tr>
-            <th>Proyecto</th>
-            <th>Estado</th>
+            <th>Project</th>
+            <th>Status</th>
             <th>Wallet</th>
-            <th>Contrato</th>
-            <th>Donaciones</th>
-            <th>Recaudacion</th>
-            <th>Tiempo Restante</th>
+            <th>Contract</th>
+            <th>Donations</th>
+            <th>Funding</th>
+            <th>Remaining Time</th>
             <th></th>
             <th></th>
           </tr>
@@ -23,7 +23,6 @@ export default function ProjectsTable(props) {
             return (<ProjectsTableRow key={project.id} project={project}/>)
           })}
         </tbody>
-        
       </table>
     </div>
   )
