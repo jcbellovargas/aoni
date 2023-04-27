@@ -22,15 +22,25 @@ export default function NewProject(){
   const { pid } = router.query;
 
   const tagOptions = [    
-    { id: 'Salud', text: 'Salud' },
-    { id: 'Tecnologia', text: 'Tecnologia' },
-    { id: 'Moda', text: 'Moda' },
-    { id: 'Negocios', text: 'Negocios' },
-    { id: 'Juegos', text: 'Juegos' },
-    { id: 'Arte', text: 'Arte' },
-    { id: 'Emergencia', text: 'Emergencia' },
-    { id: 'Comida', text: 'Comida' },
-    { id: 'Redes Sociales', text: 'Redes Sociales' },
+    // { id: 'Salud', text: 'Salud' },
+    // { id: 'Tecnologia', text: 'Tecnologia' },
+    // { id: 'Moda', text: 'Moda' },
+    // { id: 'Negocios', text: 'Negocios' },
+    // { id: 'Juegos', text: 'Juegos' },
+    // { id: 'Arte', text: 'Arte' },
+    // { id: 'Emergencia', text: 'Emergencia' },
+    // { id: 'Comida', text: 'Comida' },
+    // { id: 'Redes Sociales', text: 'Redes Sociales' },
+
+    { id: 'Health', text: 'Health' },
+    { id: 'Technology', text: 'Technology' },
+    { id: 'Fashion', text: 'Fashion' },
+    { id: 'Business', text: 'Business' },
+    { id: 'Games', text: 'Games' },
+    { id: 'Art', text: 'Art' },
+    { id: 'Emergency', text: 'Emergency' },
+    { id: 'Food', text: 'Food' },
+    { id: 'Social Networks', text: 'Social Networks' },
 
   ];
 

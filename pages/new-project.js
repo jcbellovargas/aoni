@@ -28,16 +28,15 @@ export default function NewProject(){
   const router = useRouter();
 
   const tagOptions = [    
-    { id: 'Salud', text: 'Salud' },
-    { id: 'Tecnologia', text: 'Tecnologia' },
-    { id: 'Moda', text: 'Moda' },
-    { id: 'Negocios', text: 'Negocios' },
-    { id: 'Juegos', text: 'Juegos' },
-    { id: 'Arte', text: 'Arte' },
-    { id: 'Emergencia', text: 'Emergencia' },
-    { id: 'Comida', text: 'Comida' },
-    { id: 'Redes Sociales', text: 'Redes Sociales' },
-
+    { id: 'Health', text: 'Health' },
+    { id: 'Technology', text: 'Technology' },
+    { id: 'Fashion', text: 'Fashion' },
+    { id: 'Business', text: 'Business' },
+    { id: 'Games', text: 'Games' },
+    { id: 'Art', text: 'Art' },
+    { id: 'Emergency', text: 'Emergency' },
+    { id: 'Food', text: 'Food' },
+    { id: 'Social Networks', text: 'Social Networks' },
   ];
 
   const handleFileChange = (e) => {
@@ -75,13 +74,13 @@ export default function NewProject(){
         user: session.user.id
       });
       if (response.error){
-        showError(`Hubo un error al crear el proyecto: \n${error}`);
+        showError(`We found an error trying to create the project: \n${error}`);
       } else {
         router.push("/profile")
       }
     } catch(error) {
       console.log(error);
-      showError(`Hubo un error al crear el proyecto: \n${error}`);
+      showError(`We found an error trying to create the project: \n${error}`);
     }
     loadingModalRef.current.click();
   }
@@ -101,55 +100,55 @@ export default function NewProject(){
         { session && (
           <div className="card w-2/3 bg-base-100 shadow-xl grid grid-cols-2">
             <div className="card-body">
-              <h2 className="card-title">{`Crea tu nuevo proyecto`}</h2>
+              <h2 className="card-title">{`Create your new project`}</h2>
               <div className="card-body">
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">
-                    <span className="label-text">Nombre del proyecto</span>
+                    <span className="label-text">Project Name</span>
                   </label>
-                  <input type="text" placeholder="Nombre" className="input input-bordered input-primary w-full" onChange={(e) => {setProjectName(e.target.value)}} />
+                  <input type="text" placeholder="Name" className="input input-bordered input-primary w-full" onChange={(e) => {setProjectName(e.target.value)}} />
                 </div>
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">
-                    <span className="label-text">Descripcion</span>
+                    <span className="label-text">Description</span>
                   </label>
-                  <textarea className="textarea textarea-primary" onChange={(e) => setProjectDescription(e.target.value)} placeholder="Detalles del proposito del proyecto y sus caracteristicas"></textarea>
+                  <textarea className="textarea textarea-primary" onChange={(e) => setProjectDescription(e.target.value)} placeholder="Project details and goal description"></textarea>
                 </div>
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">
-                    <span className="label-text">Tipo de proyecto</span>
+                    <span className="label-text">Project Type</span>
                   </label>
                   <TagInput suggestions={tagOptions} tags={projectTags} setTags={setProjectTags}/>
                 </div>
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">
-                    <span className="label-text">Objetivo a recaudar (USDT)</span>
+                    <span className="label-text">Funding goal (USDT)</span>
                   </label>
-                  <input type="number" placeholder="Monto objetivo en USDT" className="input input-bordered input-primary w-full" onChange={(e) => {setProjectFundingGoal({token: "USDT", amount: e.target.value})}}/>
+                  <input type="number" placeholder="Funding Goal (USDT)" className="input input-bordered input-primary w-full" onChange={(e) => {setProjectFundingGoal({token: "USDT", amount: e.target.value})}}/>
                 </div>
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">
-                    <span className="label-text">Wallet address del proyecto</span>
+                    <span className="label-text">Project wallet address</span>
                   </label>
-                  <input type="text" onChange={(e) => {setProjectOwnerAddress(e.target.value)}} defaultValue={projectOwnerAddress} placeholder="Wallet en la que se cobraran las recaudaciones" className="input input-bordered input-primary w-full"/>
+                  <input type="text" onChange={(e) => {setProjectOwnerAddress(e.target.value)}} defaultValue={projectOwnerAddress} placeholder="Wallet address to collect the funding" className="input input-bordered input-primary w-full"/>
                 </div>
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">
-                    <span className="label-text">Fecha limite</span>
+                    <span className="label-text">Deadline</span>
                   </label>
-                  <DatePicker className="input input-bordered input-primary w-full" onChange={(date) => setProjectDeadline(date)} selected={projectDeadline} placeholderText={"Fecha limite para alcanzar el objetivo"}/>
+                  <DatePicker className="input input-bordered input-primary w-full" onChange={(date) => setProjectDeadline(date)} selected={projectDeadline} placeholderText={"Project deadline"}/>
                 </div>
 
                 <div className="form-control w-full max-w-2xl">
                   <label className="label">
-                    <span className="label-text">Imagen del proyecto</span>
+                    <span className="label-text">Project photo</span>
                   </label>
                   <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileChange}/>
-                  <input type="text" value={projectImage.name} placeholder="Tamaño recomendado de 640x480" className="input input-bordered input-primary w-full cursor-pointer" onClick={handleImageInputClick}/>
+                  <input type="text" value={projectImage.name} placeholder="Recommended size 640x480" className="input input-bordered input-primary w-full cursor-pointer" onClick={handleImageInputClick}/>
                 </div>
 
                 <div className="card-actions justify-end">
-                  <button onClick={createProject} className="btn btn-primary" disabled={!createButtonEnabled()}>Crear Proyecto</button>
+                  <button onClick={createProject} className="btn btn-primary" disabled={!createButtonEnabled()}>Create Project</button>
                 </div>
               </div>
             </div>
@@ -158,7 +157,7 @@ export default function NewProject(){
         )}
       </div>
 
-      <LoadingModal msg={"Creando proyecto"} openRef={loadingModalRef}/>
+      <LoadingModal msg={"Creating Project"} openRef={loadingModalRef}/>
       <ErrorModal msg={errorMessage} openRef={errorModalRef}/>
     </>
   )

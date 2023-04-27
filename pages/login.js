@@ -27,8 +27,8 @@ export default function Login({ providers }) {
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col">
         <div className="text-center">
-          <h1 className="text-5xl font-bold">Iniciar Sesion</h1>
-          <p className="py-6">Ingresa con cualquiera de tus cuentas para poder crear nuevos proyectos y disfrutar de todos los beneficios de Aoni.</p>
+          <h1 className="text-5xl font-bold">Log In</h1>
+          <p className="py-6">Log in with any of your accounts to be able to create new projects and enjoy all the benefits of Aoni.</p>
         </div>
         <div className="card flex-shrink-0 w-full max-w-2xl shadow-2xl bg-base-100">
           <div className="card-body">
@@ -36,7 +36,7 @@ export default function Login({ providers }) {
               <div className="alert alert-error shadow-lg">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <span>{`Error al iniciar sesion. Asegurate de user el provider con el que te registraste por primera vez. (${error})`}</span>
+                  <span>{`Error when logging in. Make sure to use the provider with which you first registered. (${error})`}</span>
                 </div>
               </div>
             )}

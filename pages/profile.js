@@ -3,8 +3,6 @@ import { useState, useEffect } from "react"
 import ProfileEdit from "../components/profile/profile-edit"
 import ProfileStats from "../components/profile/profile-stats"
 import ProjectsTable from "../components/profile/projects-table"
-import { getData } from "/utils/fetch-utils"
-import { getProjectContractDetails } from '/utils/wallet-utils';
 import { getProjectsByUser } from '../utils/project-service';
 
 

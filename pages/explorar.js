@@ -4,7 +4,7 @@ import ProjectCard from "../components/explorar/project-card";
 import { getProjectsByTag } from "../utils/project-service";
 
 export default function Explorar(){
-  const [selectedTag, setSelectedTag] = useState("Negocios");
+  const [selectedTag, setSelectedTag] = useState("Business");
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
