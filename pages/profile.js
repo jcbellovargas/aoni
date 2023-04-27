@@ -30,7 +30,7 @@ export default function Profile(){
           <>
             <div className="card w-3/4 bg-base-100 shadow-xl">
               <div className="card-body">
-                <h2 className="card-title">{`Bienvenido ${session.user.name}!`}</h2>
+                <h2 className="card-title">{`Welcome ${session.user.name}!`}</h2>
                 <ProfileStats projects={projects}/>
                 <ProjectsTable projects={projects} user={session.user}/>
                 <ProfileEdit session={session}/>
