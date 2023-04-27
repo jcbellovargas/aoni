@@ -16,7 +16,7 @@ export default function ProjectCard(props) {
           <div className="card-body">
             <h2 className="card-title">
               {props.project.name}
-              <div className="badge badge-secondary">NUEVO</div>
+              <div className="badge badge-secondary">NEW</div>
             </h2>
             <p className="h-20">{projectDesc(props.project.description)}</p>
             <div className="flex justify-between">
